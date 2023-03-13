@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_films"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Фильмы"  />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Поиск" />
+    <item
+        android:id="@+id/navigation_controller"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Пульт" />
+    <item
+        android:id="@+id/navigation_torrents"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Торренты" />
+</menu>
