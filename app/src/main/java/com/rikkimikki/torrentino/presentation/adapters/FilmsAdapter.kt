@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class FilmsAdapter: ListAdapter<PreFilm, FilmsAdapter.FilmViewHolder>(FilmsDiffCallback){
 
-    private var onReachEndListener: OnReachEndListener? = null
+    var onReachEndListener: OnReachEndListener? = null
+    var onFilmClickListener: OnFilmClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val view: View =
@@ -45,7 +46,12 @@ class FilmsAdapter: ListAdapter<PreFilm, FilmsAdapter.FilmViewHolder>(FilmsDiffC
         val imageViewPoster= viewBinding.imageViewFilmPoster
     }
 
-    var onFilmClickListener: OnFilmClickListener? = null
+    fun addFilms(list: List<PreFilm>){
+        val tempCurrentList = currentList.toMutableList()
+        tempCurrentList.addAll(list)
+        submitList(tempCurrentList)
+    }
+
 
     interface OnFilmClickListener {
         fun onFilmClick(id: Int, type: String)

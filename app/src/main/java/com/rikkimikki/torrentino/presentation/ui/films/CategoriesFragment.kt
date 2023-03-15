@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentCategoriesBinding
+import com.rikkimikki.torrentino.presentation.MainActivity
 import com.rikkimikki.torrentino.presentation.adapters.CategoryAdapter
 
 class CategoriesFragment : Fragment() {
@@ -40,7 +42,20 @@ class CategoriesFragment : Fragment() {
         }
         adapter.onAllFilmButtonClickListener = object : CategoryAdapter.OnAllFilmButtonClickListener{
             override fun onButtonClick(genre: String) {
-                Toast.makeText(requireContext(), ""+genre, Toast.LENGTH_SHORT).show()
+
+                //val fragment = SelectedCategoryFragment
+                //val bundle = Bundle()
+                //bundle.putString("genre", genre)
+                val fragment = SelectedCategoryFragment.newInstance(genre)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .hide(this@CategoriesFragment)
+                    .add(R.id.filmsFragmentContainer,fragment)
+                    .commit()
+
+
+                //requireActivity().supportFragmentManager.beginTransaction().hide(this@CategoriesFragment).show(fragment).commit()
+                //(requireActivity() as MainActivity).activeFragment = fragment
+
             }
         }
 
@@ -54,7 +69,6 @@ class CategoriesFragment : Fragment() {
             adapter.submitList(it.toMutableList())
         }
     }
-
 
     override fun onDestroyView() {
         _binding = null

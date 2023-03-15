@@ -18,6 +18,8 @@ class CategoriesViewModel : ViewModel(){
     private val apiService = ApiFactory.getApiService()
     private val categories = SingleLiveData<List<Category>>()
 
+    val films = SingleLiveData<List<PreFilm>>()
+
     fun getCategories():SingleLiveData<List<Category>>{
         disposable.add(apiService.getCategories(getCategoriesBody(), "MovieListCategory")
             .subscribeOn(Schedulers.io())
@@ -32,9 +34,9 @@ class CategoriesViewModel : ViewModel(){
         return categories
     }
 
-    fun getFilms(category: Category, offset:Int = 0):SingleLiveData<List<PreFilm>>{
+    fun getFilms(genre: String):SingleLiveData<List<PreFilm>>{
         val films = SingleLiveData<List<PreFilm>>()
-        disposable.add(apiService.getFilms(getFilmsFromCategoryBody(category,offset), "MovieDesktopListPage")
+        disposable.add(apiService.getFilms(getFilmsFromCategoryBody(genre,0), "MovieDesktopListPage")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -51,5 +53,18 @@ class CategoriesViewModel : ViewModel(){
     override fun onCleared() {
         disposable.dispose()
         super.onCleared()
+    }
+
+    fun getFilmsWithOffset(genre: String, offset: Int) {
+        disposable.add(apiService.getFilms(getFilmsFromCategoryBody(genre,offset), "MovieDesktopListPage")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { filmsResponse ->
+                    films.postValue(filmsResponse.data.movieListBySlug.movie.preFilms)
+                },
+                { throwable ->
+                    println(throwable.toString())
+                }))
     }
 }

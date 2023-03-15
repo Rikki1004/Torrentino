@@ -7,6 +7,9 @@ import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.ActivityMainBinding
 import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.CategoriesFragment
+import com.rikkimikki.torrentino.presentation.ui.films.FilmDetailFragment
+import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
+import com.rikkimikki.torrentino.presentation.ui.films.SelectedCategoryFragment
 import com.rikkimikki.torrentino.presentation.ui.search.SearchFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
 
@@ -15,8 +18,9 @@ class MainActivity : AppCompatActivity() {
     private val controllerFragment = ControllerFragment()
     private val torrentsFragment = TorrentsFragment()
     private val searchFragment = SearchFragment()
-    private val filmsFragment = CategoriesFragment()
-    private var activeFragment: Fragment = filmsFragment
+    private val filmsFragment = FilmsContainerFragment()
+
+    var activeFragment: Fragment = filmsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
