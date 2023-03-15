@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainContainer"
@@ -14,8 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_films">
-        <!--android:name="com.rikkimikki.torrentino.ui.films.FilmsFragment"-->
+        tools:layout="@layout/fragment_categories">
+        <!--android:name="com.rikkimikki.torrentino.presentation.CategoriesFragment"-->
 
     </androidx.fragment.app.FragmentContainerView>
 

@@ -1,5 +1,33 @@
 <resources>
     <string name="app_name">Torrentino</string>
+    <string name="title_home">Фильмы</string>
+    <string name="title_dashboard">Поиск</string>
+    <string name="title_notifications">Пульт</string>
+    <string name="text_loading">Загрузка</string>
+    <string name="title_store">Торренты</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="watch">Смотреть</string>
+    <string name="info_title">Название</string>
+    <string name="info_orig_title">Оригинальное название</string>
+    <string name="film_info_rating">Рейтинг</string>
+    <string name="film_release_date">Дата релиза</string>
+    <string name="film_overview">Описание</string>
+    <string name="film_traller">треллер фильма</string>
+    <string name="play_icon">play icon</string>
+    <string name="film_poster">постер к фильму</string>
+    <string name="store_size">Размер</string>
+    <string name="store_speed">Скорость</string>
+    <string name="store_peers">Пиры</string>
+    <string name="store_delete">Delete</string>
+    <string name="store_play">Play</string>
+    <string name="controller_nothing">Ничего не воспороизводится</string>
+    <string name="cotroller_time00">00:00</string>
+    <string name="controller_previous">controller_previous</string>
+    <string name="controller_play">controller_play</string>
+    <string name="controller_stop">controller_stop</string>
+    <string name="controller_next">controller_next</string>
+    <string name="search">Поиск</string>
+    <string name="All">Все</string>
+    <string name="films">Фильмы</string>
 </resources>
