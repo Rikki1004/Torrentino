@@ -39,7 +39,7 @@ class CategoryAdapter(
         val adapter = FilmsAdapter()
         holder.textViewTitle.text = category.name
         holder.recyclerView.adapter = adapter
-        viewModel.getFilms(category,0) .observe(context as MainActivity){
+        viewModel.getFilms(category.graphName).observe(context as MainActivity){
             adapter.submitList(it.toMutableList())
         }
 

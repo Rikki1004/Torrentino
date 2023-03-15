@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentCategoriesBinding
+import com.rikkimikki.torrentino.presentation.MainActivity
 import com.rikkimikki.torrentino.presentation.adapters.CategoryAdapter
 
 class CategoriesFragment : Fragment() {
@@ -35,12 +37,26 @@ class CategoriesFragment : Fragment() {
         adapter = CategoryAdapter(requireContext())
         adapter.onFilmClickListener = object : CategoryAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
-                Toast.makeText(requireContext(), ""+id+" "+ type, Toast.LENGTH_SHORT).show()
+
+                val fragment =  FilmDetailFragment.newInstance(id,type)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    //.hide(this@CategoriesFragment)
+                    .add(R.id.filmsFragmentContainer,fragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
         }
         adapter.onAllFilmButtonClickListener = object : CategoryAdapter.OnAllFilmButtonClickListener{
             override fun onButtonClick(genre: String) {
-                Toast.makeText(requireContext(), ""+genre, Toast.LENGTH_SHORT).show()
+
+                val fragment = SelectedCategoryFragment.newInstance(genre)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    //.hide(this@CategoriesFragment)
+                    .add(R.id.filmsFragmentContainer,fragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
         }
 
@@ -54,7 +70,6 @@ class CategoriesFragment : Fragment() {
             adapter.submitList(it.toMutableList())
         }
     }
-
 
     override fun onDestroyView() {
         _binding = null

@@ -2,13 +2,14 @@ package com.rikkimikki.torrentino.data
 
 import com.rikkimikki.torrentino.domain.pojo.category.CategoryResponse
 import com.rikkimikki.torrentino.domain.pojo.film.FilmsResponse
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponce
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
 import com.rikkimikki.torrentino.domain.pojo.search.SearchResponce
 import com.rikkimikki.torrentino.domain.pojo.server.*
-import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponce
+import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponse
 import com.rikkimikki.torrentino.domain.pojo.tvSerie.TvSerieInfoResponce
 import io.reactivex.Observable
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -34,7 +35,7 @@ interface ApiService {
     fun getFilmInfo(
         @Body params: RequestBody,
         @Query("operationName") graph: String
-    ): Observable<FilmInfoResponce>
+    ): Observable<FilmInfoResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
@@ -56,7 +57,7 @@ interface ApiService {
         @Path("ip") ip: String,
         @Query("req") req: String,
         @Query("q") q: String
-    ): Observable<TorrentResponce>
+    ): Observable<TorrentResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{ip}:8090/torrents")
@@ -108,4 +109,16 @@ interface ApiService {
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{server}/ping")
     fun findServer(@Path("server") path: String): Observable<FindServerResponce>
+
+
+
+
+    //@Headers("service-id: 25", "Content-Type: application/json")
+    @GET("https://{ip}/get_new.php")
+    fun searchTorrents(
+        @Path("ip") ip: String,
+        @Query("secret") secret: String,
+        @Query("hash") hash: String,
+        @Query("q") q: String,
+    ): Observable<ResponseBody>
 }
