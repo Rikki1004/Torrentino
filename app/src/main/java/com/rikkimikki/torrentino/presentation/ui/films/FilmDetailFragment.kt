@@ -56,12 +56,6 @@ class FilmDetailFragment : Fragment() {
         else
             viewModel.getTvSerie(id)
 
-        /*binding.playButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent(context, SearchTorrentsActivity::class.java)
-            intent.putExtra("film", filmRequest)
-            intent.putExtra("poster", filmPoster)
-            startActivity(intent)
-        })*/
     }
 
     private fun startObservers() {
@@ -100,6 +94,13 @@ class FilmDetailFragment : Fragment() {
                 imageViewTrallerPreview.visibility = View.GONE
                 imageViewPlay.visibility = View.GONE
             }
+
+            binding.playButton.setOnClickListener(View.OnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(R.id.filmsFragmentContainer,SearchTorrentsFragment.newInstance(film.title.russian,"https:${film.poster.url}/600x900"))
+                    .addToBackStack(null)
+                    .commit()
+            })
         }
     }
 

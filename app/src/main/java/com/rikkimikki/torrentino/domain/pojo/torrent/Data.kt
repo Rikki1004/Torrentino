@@ -1,69 +1,31 @@
-package com.rikkimikki.torrentino.domain.pojo.torrent;
+package com.rikkimikki.torrentino.domain.pojo.torrent
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class Data {
+data class Data (
     @SerializedName("link")
     @Expose
-    private String link;
+    val link: String,
 
     @SerializedName("film")
     @Expose
-    private String film;
+    val film: String,
 
     @SerializedName("magnetLink")
     @Expose
-    private String magnetLink;
+    val magnetLink: String,
 
     @SerializedName("peers")
     @Expose
-    private String peers;
+    val peers: String,
 
     @SerializedName("size")
     @Expose
-    private String size;
+    val size: String
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getMagnetLink() {
-        return magnetLink;
-    }
-
-    public void setMagnetLink(String magnetLink) {
-        this.magnetLink = magnetLink;
-    }
-
-    public String getPeers() {
-        return peers;
-    }
-
-    public void setPeers(String peers) {
-        this.peers = peers;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getFilm() {
-        return film;
-    }
-
-    public void setFilm(String film) {
-        this.film = film;
-    }
-    public String toString(){
-        return film+" - "+size + " ("+peers+")";
+){
+    override fun toString(): String {
+        return "$film - $size ($peers)"
     }
 }

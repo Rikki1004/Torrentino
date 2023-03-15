@@ -1,11 +1,13 @@
 package com.rikkimikki.torrentino.presentation.ui.films
 
+import android.R
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.domain.pojo.category.Category
 import com.rikkimikki.torrentino.domain.pojo.film.PreFilm
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Film
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
 import com.rikkimikki.torrentino.domain.pojo.tvSerie.TvSerieInfoResponce
 import com.rikkimikki.torrentino.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +19,7 @@ class CategoriesViewModel : ViewModel(){
     private val apiService = ApiFactory.getApiService()
     private val categories = SingleLiveData<List<Category>>()
 
-    val films = SingleLiveData<List<PreFilm>>()
+    var films = SingleLiveData<List<PreFilm>>()
     val film = SingleLiveData<Film>()
     val tvSerie = SingleLiveData<TvSerieInfoResponce>()
 
@@ -93,4 +95,5 @@ class CategoriesViewModel : ViewModel(){
                     println(throwable.toString())
                 }))
     }
+
 }
