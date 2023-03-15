@@ -37,24 +37,25 @@ class CategoriesFragment : Fragment() {
         adapter = CategoryAdapter(requireContext())
         adapter.onFilmClickListener = object : CategoryAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
-                Toast.makeText(requireContext(), ""+id+" "+ type, Toast.LENGTH_SHORT).show()
+
+                val fragment =  FilmDetailFragment.newInstance(id,type)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    //.hide(this@CategoriesFragment)
+                    .add(R.id.filmsFragmentContainer,fragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
         }
         adapter.onAllFilmButtonClickListener = object : CategoryAdapter.OnAllFilmButtonClickListener{
             override fun onButtonClick(genre: String) {
 
-                //val fragment = SelectedCategoryFragment
-                //val bundle = Bundle()
-                //bundle.putString("genre", genre)
                 val fragment = SelectedCategoryFragment.newInstance(genre)
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .hide(this@CategoriesFragment)
+                    //.hide(this@CategoriesFragment)
                     .add(R.id.filmsFragmentContainer,fragment)
+                    .addToBackStack(null)
                     .commit()
-
-
-                //requireActivity().supportFragmentManager.beginTransaction().hide(this@CategoriesFragment).show(fragment).commit()
-                //(requireActivity() as MainActivity).activeFragment = fragment
 
             }
         }

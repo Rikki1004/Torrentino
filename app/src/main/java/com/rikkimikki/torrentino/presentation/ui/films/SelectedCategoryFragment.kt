@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentSelectedCategoryBinding
 import com.rikkimikki.torrentino.presentation.adapters.FilmsAdapter
 
@@ -57,6 +58,17 @@ class SelectedCategoryFragment : Fragment() {
                 viewModel.getFilmsWithOffset(genre,offset)
             }
         }
+        adapter.onFilmClickListener = object :FilmsAdapter.OnFilmClickListener{
+            override fun onFilmClick(id: Int, type: String) {
+                val fragment =  FilmDetailFragment.newInstance(id,type)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    //.hide(this@SelectedCategoryFragment)
+                    .add(R.id.filmsFragmentContainer,fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+
         viewModel.getFilmsWithOffset(genre,0)
     }
 

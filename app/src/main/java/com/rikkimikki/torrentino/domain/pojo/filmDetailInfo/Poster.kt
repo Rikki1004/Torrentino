@@ -1,18 +1,10 @@
-package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo;
+package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class Poster {
+data class Poster (
     @SerializedName("avatarsUrl")
     @Expose
-    private String url;
-
-    public String getUrl() {
-        return "https:"+url+"/600x900";
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-}
+    var url: String
+)

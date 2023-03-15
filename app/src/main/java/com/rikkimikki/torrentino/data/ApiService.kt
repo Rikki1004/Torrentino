@@ -2,7 +2,7 @@ package com.rikkimikki.torrentino.data
 
 import com.rikkimikki.torrentino.domain.pojo.category.CategoryResponse
 import com.rikkimikki.torrentino.domain.pojo.film.FilmsResponse
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponce
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
 import com.rikkimikki.torrentino.domain.pojo.search.SearchResponce
 import com.rikkimikki.torrentino.domain.pojo.server.*
 import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponce
@@ -34,7 +34,7 @@ interface ApiService {
     fun getFilmInfo(
         @Body params: RequestBody,
         @Query("operationName") graph: String
-    ): Observable<FilmInfoResponce>
+    ): Observable<FilmInfoResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")

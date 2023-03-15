@@ -1,30 +1,14 @@
-package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo;
+package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class KinopoiskReviews {
+data class KinopoiskReviews (
     @SerializedName("count")
     @Expose
-    private int count;
+    var count :Int,
 
     @SerializedName("value")
     @Expose
-    private Float value;
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public Float getValue() {
-        return value;
-    }
-
-    public void setValue(Float value) {
-        this.value = value;
-    }
-}
+    var value: Float
+)

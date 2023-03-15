@@ -1,16 +1,15 @@
 package com.rikkimikki.torrentino.presentation.ui.films
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.domain.pojo.category.Category
 import com.rikkimikki.torrentino.domain.pojo.film.PreFilm
-import com.rikkimikki.torrentino.utils.SingleLiveData
-import com.rikkimikki.torrentino.utils.getCategoriesBody
-import com.rikkimikki.torrentino.utils.getFilmsFromCategoryBody
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Film
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
+import com.rikkimikki.torrentino.domain.pojo.tvSerie.TvSerieInfoResponce
+import com.rikkimikki.torrentino.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class CategoriesViewModel : ViewModel(){
@@ -19,6 +18,8 @@ class CategoriesViewModel : ViewModel(){
     private val categories = SingleLiveData<List<Category>>()
 
     val films = SingleLiveData<List<PreFilm>>()
+    val film = SingleLiveData<Film>()
+    val tvSerie = SingleLiveData<TvSerieInfoResponce>()
 
     fun getCategories():SingleLiveData<List<Category>>{
         disposable.add(apiService.getCategories(getCategoriesBody(), "MovieListCategory")
@@ -62,6 +63,31 @@ class CategoriesViewModel : ViewModel(){
             .subscribe(
                 { filmsResponse ->
                     films.postValue(filmsResponse.data.movieListBySlug.movie.preFilms)
+                },
+                { throwable ->
+                    println(throwable.toString())
+                }))
+    }
+
+    fun getFilm(id:Int){
+        disposable.add(apiService.getFilmInfo (getFilmsBody(id), "FilmBaseInfo")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { filmResponse ->
+                    film.postValue(filmResponse.data.film)
+                },
+                { throwable ->
+                    println(throwable.toString())
+                }))
+    }
+    fun getTvSerie(id:Int){
+        disposable.add(apiService.getTvSerieInfo (getTvSerieBody(id), "TvSeriesBaseInfo")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { tvSerieResponse ->
+                    tvSerie.postValue(tvSerieResponse)
                 },
                 { throwable ->
                     println(throwable.toString())

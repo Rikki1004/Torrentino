@@ -1,18 +1,10 @@
-package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo;
+package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class Data {
+data class Data (
     @SerializedName("film")
     @Expose
-    private Film film;
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-}
+    var film: Film
+)
