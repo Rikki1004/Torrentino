@@ -1,43 +1,18 @@
-package com.rikkimikki.torrentino.domain.pojo.server;
+package com.rikkimikki.torrentino.domain.pojo.server
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class FileStats {
+data class FileStats (
     @SerializedName("id")
     @Expose
-    private String id;
+    val id: String,
 
     @SerializedName("length")
     @Expose
-    private String length;
+    val length: String,
 
     @SerializedName("path")
     @Expose
-    private String path;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getLength() {
-        return length;
-    }
-
-    public void setLength(String length) {
-        this.length = length;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String hash) {
-        this.path = hash;
-    }
-}
-
+    val path: String
+)

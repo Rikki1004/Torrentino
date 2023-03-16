@@ -1,18 +1,10 @@
-package com.rikkimikki.torrentino.domain.pojo.search;
+package com.rikkimikki.torrentino.domain.pojo.search
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class Kinopoisk {
+data class Kinopoisk (
     @SerializedName("value")
     @Expose
-    private double value;
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-}
+    val value :Float
+)

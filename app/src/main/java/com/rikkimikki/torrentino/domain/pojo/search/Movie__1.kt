@@ -1,118 +1,50 @@
-package com.rikkimikki.torrentino.domain.pojo.search;
+package com.rikkimikki.torrentino.domain.pojo.search
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Poster;
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Title;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Poster
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Title
 
-import java.util.List;
-
-public class Movie__1 {
+data class Movie__1 (
     @SerializedName("id")
     @Expose
-    private int id;
+    val id :Int,
+
     @SerializedName("title")
     @Expose
-    private Title title;
+    val title: Title,
+
     @SerializedName("rating")
     @Expose
-    private Rating rating;
+    val rating: Rating,
+
     @SerializedName("poster")
     @Expose
-    private Poster poster;
+    val poster: Poster?,
+
     @SerializedName("viewOption")
     @Expose
-    private Object viewOption;
+    val viewOption: Any,
+
     @SerializedName("__typename")
     @Expose
-    private String typename;
+    val typename: String,
+
     @SerializedName("type")
     @Expose
-    private String type;
+    val type: String,
+
     @SerializedName("productionYear")
     @Expose
-    private int productionYear;
+    val productionYear :Int = 0,
 
     @SerializedName("releaseYears")
     @Expose
-    private List<ReleaseYear> releaseYears = null;
+    val releaseYears: List<ReleaseYear>? = null
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Title getTitle() {
-        return title;
-    }
-
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
-    }
-
-    public String getPoster() {
-        if (poster != null)
-            return poster.getUrl();
-        return "https://error.error";
-    }
-
-    public void setPoster(Poster poster) {
-        this.poster = poster;
-    }
-
-    public Object getViewOption() {
-        return viewOption;
-    }
-
-    public void setViewOption(Object viewOption) {
-        this.viewOption = viewOption;
-    }
-
-    public String getTypename() {
-        return typename;
-    }
-
-    public void setTypename(String typename) {
-        this.typename = typename;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getReleaseDate(){
-        if (productionYear != 0)
-            return String.valueOf(productionYear);
-        else if (getReleaseYears() != null){
-            return ""+ getReleaseYears().get(0).getStart() + (getReleaseYears().get(0).getEnd() !=0 ? " - " + getReleaseYears().get(0).getEnd() : "");
-        }else
-            return "";
-    }
-
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
-    }
-
-    public List<ReleaseYear> getReleaseYears() {
-        return releaseYears;
-    }
-
-    public void setReleaseYears(List<ReleaseYear> releaseYears) {
-        this.releaseYears = releaseYears;
-    }
+){
+    val releaseDate: String
+        get() = if (productionYear != 0) productionYear.toString() else if (releaseYears != null) {
+            "" + releaseYears[0].start + if (releaseYears[0].end != 0) " - " + releaseYears[0].end else ""
+        } else ""
 }

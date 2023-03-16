@@ -1,18 +1,10 @@
-package com.rikkimikki.torrentino.domain.pojo.server;
+package com.rikkimikki.torrentino.domain.pojo.server
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class VolumeResponce {
+data class VolumeResponse (
     @SerializedName("volume")
     @Expose
-    private int volume;
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-}
+    val volume :Int
+)

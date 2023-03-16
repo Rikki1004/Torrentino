@@ -38,9 +38,8 @@ class CategoriesFragment : Fragment() {
         adapter.onFilmClickListener = object : CategoryAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
 
-                val fragment =  FilmDetailFragment.newInstance(id,type)
+                val fragment =  FilmDetailFragment.newInstance(id,type,R.id.filmsFragmentContainer)
                 requireActivity().supportFragmentManager.beginTransaction()
-                    //.hide(this@CategoriesFragment)
                     .add(R.id.filmsFragmentContainer,fragment)
                     .addToBackStack(null)
                     .commit()
@@ -52,7 +51,6 @@ class CategoriesFragment : Fragment() {
 
                 val fragment = SelectedCategoryFragment.newInstance(genre)
                 requireActivity().supportFragmentManager.beginTransaction()
-                    //.hide(this@CategoriesFragment)
                     .add(R.id.filmsFragmentContainer,fragment)
                     .addToBackStack(null)
                     .commit()

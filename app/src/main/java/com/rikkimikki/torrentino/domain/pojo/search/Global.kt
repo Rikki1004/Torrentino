@@ -1,28 +1,32 @@
-package com.rikkimikki.torrentino.domain.pojo.search;
+package com.rikkimikki.torrentino.domain.pojo.search
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Poster;
-import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Title;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Poster
+import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Title
 
-public class Global {
+data class Global (
     @SerializedName("id")
     @Expose
-    private int id;
+    val id :Int,
+
     @SerializedName("title")
     @Expose
-    private Title title;
+    val title: Title,
+
     @SerializedName("rating")
     @Expose
-    private Rating rating;
+    val rating: Rating,
+
     @SerializedName("poster")
     @Expose
-    private Poster poster;
+    val poster: Poster,
 
     @SerializedName("productionYear")
     @Expose
-    private int productionYear;
+    val productionYear :Int,
+
     @SerializedName("__typename")
     @Expose
-    private String typename;
-}
+    val typename: String
+)

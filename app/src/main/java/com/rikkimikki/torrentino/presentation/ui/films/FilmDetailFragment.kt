@@ -15,10 +15,12 @@ import com.squareup.picasso.Picasso
 
 private const val ARG_ID = "ID"
 private const val ARG_TYPE = "TYPE"
+private const val CONTAINER = "CONTAINER"
 
 
 class FilmDetailFragment : Fragment() {
     private var id: Int = 0
+    private var container: Int = 0
     private lateinit var type: String
 
     private var _binding: FragmentFilmDetailBinding? = null
@@ -28,8 +30,9 @@ class FilmDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireArguments().let {
-            if (it.containsKey(ARG_ID) && it.containsKey(ARG_TYPE)){
+            if (it.containsKey(ARG_ID) && it.containsKey(ARG_TYPE) && it.containsKey(CONTAINER)){
                 id = it.getInt(ARG_ID)
+                container = it.getInt(CONTAINER)
                 type = it.getString(ARG_TYPE)!!
             }
             else
@@ -97,7 +100,7 @@ class FilmDetailFragment : Fragment() {
 
             binding.playButton.setOnClickListener(View.OnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.filmsFragmentContainer,SearchTorrentsFragment.newInstance(film.title.russian,"https:${film.poster.url}/600x900"))
+                    .add(container,SearchTorrentsFragment.newInstance(film.title.russian,"https:${film.poster.url}/600x900"))
                     .addToBackStack(null)
                     .commit()
             })
@@ -108,11 +111,12 @@ class FilmDetailFragment : Fragment() {
     companion object {
         const val FILM = "Film"
         const val TVSERIE = "TvSeries"
-        fun newInstance(id: Int, type: String) =
+        fun newInstance(id: Int, type: String,container:Int) =
             FilmDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_ID, id)
                     putString(ARG_TYPE, type)
+                    putInt(CONTAINER, container)
                 }
             }
     }

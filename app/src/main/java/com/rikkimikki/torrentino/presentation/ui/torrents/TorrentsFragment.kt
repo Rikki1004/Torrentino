@@ -24,8 +24,8 @@ class TorrentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.twSearch.text = "films: "+ (0..100).random()
-        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        //binding. .twSearch.text = "films: "+ (0..100).random()
+        //viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
     }
 
     override fun onDestroyView() {

@@ -1,30 +1,17 @@
-package com.rikkimikki.torrentino.domain.pojo.search;
+package com.rikkimikki.torrentino.domain.pojo.search
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SearchResponce {
+data class SearchResponse (
     @SerializedName("data")
     @Expose
-    private Data data;
-
-    public List<Movie__1> getData() {
-        List<Movie__1> oneList = new ArrayList<>();
-        if (!data.getSuggest().getTop().getTopResult().getGlobal().getTypename().equals("Person"))
-            oneList.add(data.getSuggest().getTop().getTopResult().getGlobal());
-        for (Movie i:data.getSuggest().getTop().getMovies())
-            oneList.add(i.getMovie());
-        //oneList.addAll(data.getSuggest().getTop().getMovies());
-
-
-        return oneList;
+    val data: Data
+){
+    fun getData(): List<Movie__1> {
+        val oneList: MutableList<Movie__1> = ArrayList()
+        if (data.suggest.top.topResult.global.typename != "Person") oneList.add(data.suggest.top.topResult.global)
+        for (i in data.suggest.top.movies) oneList.add(i.movie)
+        return oneList
     }
-
-    public void setData(Data data) {
-        this.data = data;
-    }
-
 }
