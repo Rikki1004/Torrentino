@@ -62,6 +62,8 @@ class SearchTorrentsFragment : Fragment() {
     private fun setListener(torrents:List<Data>) {
         binding.scrollViewTorrents.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, i, l ->
             val selectedFilm = torrents[i]
+            selectedFilm.poster = poster
+            viewModel.addTorrent(selectedFilm)
             /*val builder = AlertDialog.Builder(this@SearchTorrentsActivity)
             builder.setMessage("Воспроизвести на телефоне или на телевизоре?")
                 .setPositiveButton("Телефон", dialogClickListener)

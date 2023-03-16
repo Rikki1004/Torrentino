@@ -59,12 +59,6 @@ interface ApiService {
         @Query("q") q: String
     ): Observable<TorrentResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}:8090/torrents")
-    fun addTorrent(
-        @Path("ip") ip: String,
-        @Body params: RequestBody
-    ): Observable<AddTorrentResponce>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{ip}/player")
@@ -121,4 +115,12 @@ interface ApiService {
         @Query("hash") hash: String,
         @Query("q") q: String,
     ): Observable<ResponseBody>
+
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @POST("http://{ip}:8090/torrents")
+    fun addTorrent(
+        @Path("ip") ip: String,
+        @Body params: RequestBody
+    ): Observable<AddTorrentResponse>
 }

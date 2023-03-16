@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AddTorrentResponce {
+public class AddTorrentResponse {
     @SerializedName("title")
     @Expose
     private String title;

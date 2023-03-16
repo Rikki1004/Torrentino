@@ -22,7 +22,9 @@ data class Data (
 
     @SerializedName("size")
     @Expose
-    val size: String
+    val size: String,
+
+    var poster:String = ""
 
 ){
     override fun toString(): String {

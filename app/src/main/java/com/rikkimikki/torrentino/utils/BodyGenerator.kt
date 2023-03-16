@@ -57,6 +57,43 @@ fun getTvSerieBody(tvSerieID:Int): RequestBody{
     )
 }
 
+fun getAddTorrentBody(magnet: String,poster:String,title:String): RequestBody {
+    var body: RequestBody? = null
+    val jsonObject = JSONObject()
+    try {
+        jsonObject.put("action", "add")
+        jsonObject.put("link", magnet)
+        jsonObject.put("poster", poster)
+        jsonObject.put("save_to_db", true)
+        jsonObject.put("title", title)
+        body = jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return body!!
+}
+
+fun getBodyPlayTorrent(serverUrl:String,hash:String,title:String): RequestBody {
+    var body: RequestBody? = null
+    val jsonObject = JSONObject()
+    try {
+        jsonObject.put("playlist", "")
+        jsonObject.put("action", "play")
+        jsonObject.put("ids", "1")
+        jsonObject.put("name", title)
+        jsonObject.put(
+            "m3u",
+            "http://" + serverUrl + ":8090/stream/fname?index=1&play&save&link=" + hash
+        )
+        body = jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return body!!
+}
+
 
 fun generateCustomBody(vararg args: Pair<String,String>): RequestBody {
     var body: RequestBody? = null
