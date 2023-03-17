@@ -1,11 +1,8 @@
 package com.rikkimikki.torrentino.presentation.ui.films
 
-import android.R
 import android.app.Application
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponse
 import com.rikkimikki.torrentino.domain.pojo.category.Category
@@ -35,8 +32,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 { categoryResponse ->
                     categories.postValue(categoryResponse.getCategories())
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(),R.string.error)
                 }))
         return categories
     }
@@ -50,12 +47,11 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 { filmsResponse ->
                     films.postValue(filmsResponse.data.movieListBySlug.movie.preFilms)
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(),R.string.error)
                 }))
         return films
     }
-
 
     override fun onCleared() {
         disposable.dispose()
@@ -70,8 +66,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 { filmsResponse ->
                     films.postValue(filmsResponse.data.movieListBySlug.movie.preFilms)
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(),R.string.error)
                 }))
     }
 
@@ -83,8 +79,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 { filmResponse ->
                     film.postValue(filmResponse.data.film)
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(),R.string.error)
                 }))
     }
     fun getTvSerie(id:Int){
@@ -95,8 +91,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 { tvSerieResponse ->
                     tvSerie.postValue(tvSerieResponse)
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(),R.string.error)
                 }))
     }
 
@@ -108,9 +104,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                 val data = searchResponse
 
                 anime.postValue(data)
-            }) { throwable ->
-                throwable.printStackTrace()
-                Toast.makeText(getApplication(), "ошибка", Toast.LENGTH_SHORT).show()
+            }) {
+                toast(getApplication(),R.string.error)
             })
     }
 

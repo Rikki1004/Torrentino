@@ -31,7 +31,6 @@ class ControllerFragment : Fragment() {
 
         viewModel.getPosition()
         viewModel.getVolume()
-
     }
 
     private fun initListeners() {
@@ -56,7 +55,6 @@ class ControllerFragment : Fragment() {
                 }
             })
         }
-
     }
 
     private fun initObservers(){
@@ -73,6 +71,14 @@ class ControllerFragment : Fragment() {
             else
                 binding.buttonControllerPlay.setImageResource(android.R.drawable.ic_media_play)
         }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden)
+            viewModel.stopRequests()
+        else
+            viewModel.getPosition()
     }
 
     override fun onDestroyView() {

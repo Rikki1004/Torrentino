@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="wrap_content">
 
@@ -35,7 +34,7 @@ android:layout_height="wrap_content">
     app:layout_constraintGuide_begin="125dp" />
 
 <TextView
-    android:id="@+id/textView5"
+    android:id="@+id/textViewStoreSizeName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
@@ -50,17 +49,17 @@ android:layout_height="wrap_content">
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:text="@string/text_loading"
-    app:layout_constraintStart_toStartOf="@+id/textView5"
-    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+    app:layout_constraintStart_toStartOf="@+id/textViewStoreSizeName"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStoreSizeName" />
 
 <TextView
-    android:id="@+id/textView9"
+    android:id="@+id/textViewStoreSpeedName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="28dp"
     android:layout_marginTop="16dp"
     android:text="@string/store_speed"
-    app:layout_constraintStart_toEndOf="@+id/textView5"
+    app:layout_constraintStart_toEndOf="@+id/textViewStoreSizeName"
     app:layout_constraintTop_toBottomOf="@+id/textViewStoreTitle" />
 
 <TextView
@@ -69,17 +68,17 @@ android:layout_height="wrap_content">
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:text="@string/text_loading"
-    app:layout_constraintStart_toStartOf="@+id/textView9"
-    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+    app:layout_constraintStart_toStartOf="@+id/textViewStoreSpeedName"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStoreSpeedName" />
 
 <TextView
-    android:id="@+id/textView13"
+    android:id="@+id/textViewStorePeersName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="28dp"
     android:layout_marginTop="16dp"
     android:text="@string/store_peers"
-    app:layout_constraintStart_toEndOf="@+id/textView9"
+    app:layout_constraintStart_toEndOf="@+id/textViewStoreSpeedName"
     app:layout_constraintTop_toBottomOf="@+id/textViewStoreTitle" />
 
 <TextView
@@ -88,8 +87,8 @@ android:layout_height="wrap_content">
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:text="@string/text_loading"
-    app:layout_constraintStart_toStartOf="@+id/textView13"
-    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+    app:layout_constraintStart_toStartOf="@+id/textViewStorePeersName"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStorePeersName" />
 
 <Button
     android:id="@+id/buttonStoreDelete"

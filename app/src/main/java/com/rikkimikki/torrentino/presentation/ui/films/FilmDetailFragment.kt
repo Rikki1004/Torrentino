@@ -12,6 +12,7 @@ import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentFilmDetailBinding
 import com.rikkimikki.torrentino.domain.pojo.MovieTypes
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Film
+import com.rikkimikki.torrentino.utils.NO_POSTER_URL
 import com.squareup.picasso.Picasso
 
 private const val ARG_ID = "ID"
@@ -77,26 +78,31 @@ class FilmDetailFragment : Fragment() {
         viewModel.anime.observe(viewLifecycleOwner){anime ->
             val film = anime.toFilm()
             configurate(film)
-            binding.playButton.setOnClickListener(View.OnClickListener {
+            binding.playButton.setOnClickListener {
                 val fragment = SearchTorrentsFragment.newInstance(
                     film.title.russian,
-                    film.poster.posterLibria,
+                    film.poster?.posterLibria ?: NO_POSTER_URL,
                     anime.torrents.toData()
                 )
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .add(container,fragment)
+                    .add(container, fragment)
                     .addToBackStack(null)
                     .commit()
-            })
+            }
         }
     }
 
     private fun configurate(film: Film){
         with(binding) {
-            val poster = if (isAnime) film.poster.posterLibria else film.poster.posterKpBig
+            val poster = if (film.poster != null){
+                if (isAnime) film.poster.posterLibria else film.poster.posterKpBig
+            }else {
+                NO_POSTER_URL
+            }
             Picasso.get()
                 .load(poster)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.malevich)
+                .error(R.drawable.placeholder)
                 .into(imageViewBigPoster)
             textViewTitle.text = film.title.russian
             textViewOrigTitle.text = if (film.title.original == null) film.title.russian else film.title.original
@@ -121,13 +127,13 @@ class FilmDetailFragment : Fragment() {
             }
 
             if (!isAnime)
-                binding.playButton.setOnClickListener(View.OnClickListener {
-                    val fragment = SearchTorrentsFragment.newInstance(film.title.russian,poster)
+                binding.playButton.setOnClickListener {
+                    val fragment = SearchTorrentsFragment.newInstance(film.title.russian, poster)
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .add(container,fragment)
+                        .add(container, fragment)
                         .addToBackStack(null)
                         .commit()
-                })
+                }
         }
     }
 

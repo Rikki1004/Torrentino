@@ -10,7 +10,6 @@ import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.search.SearchContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsContainerFragment
-import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -25,31 +24,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        supportActionBar?.hide()
         setContentView(binding.root)
         setupFragments()
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         viewModel.initServers()
-
-
-
-        /*val apiService = ApiFactory.getApiService()
-
-        val disposable = apiService.searchTorrents(
-            //"tsrvwc.ru/get_new.php?secret=tsrvwc&hash=&q=search/0/0/000/2/","митчелы")
-            "tsrvwc.ru","tsrvwc","","search/0/0/000/2/митчелы")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                parseSearch(it.string())
-            }) { throwable ->
-                throwable.printStackTrace()
-                Toast.makeText(this, "ошибка", Toast.LENGTH_SHORT).show()
-            }
-*/
-
-
     }
 
     private fun setupFragments() {

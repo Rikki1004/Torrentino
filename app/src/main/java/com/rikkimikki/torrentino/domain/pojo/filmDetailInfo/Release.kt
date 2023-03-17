@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Release (
     @SerializedName("date")
     @Expose
-    var date: String
+    val date: String
 )

@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Rating (
     @SerializedName("kinopoisk")
     @Expose
-    var kpRating: KPRating
+    val kpRating: KPRating
 )

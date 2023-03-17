@@ -2,8 +2,6 @@ package com.rikkimikki.torrentino.presentation.ui.torrents
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +10,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentTorrentsFileListBinding
 import com.rikkimikki.torrentino.domain.pojo.server.MiniTorrent
 import com.rikkimikki.torrentino.utils.dataToMiniTorrents
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class TorrentsFileListFragment : Fragment() {
     private var _binding: FragmentTorrentsFileListBinding? = null
@@ -77,12 +73,12 @@ class TorrentsFileListFragment : Fragment() {
 
     private fun setListener() {
         binding.listViewStoreSeries.onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            AdapterView.OnItemClickListener { _, _, i, _ ->
                 selectedTorrent = torrents[i]
                 val builder = AlertDialog.Builder(context)
-                builder.setMessage("Воспроизвести на телефоне или на телевизоре?")
-                    .setPositiveButton("Телефон", dialogClickListener)
-                    .setNegativeButton("Телевизор", dialogClickListener).show()
+                builder.setMessage(getString(R.string.play_on_tv_or_phone))
+                    .setPositiveButton(getString(R.string.play_on_phone), dialogClickListener)
+                    .setNegativeButton(getString(R.string.play_on_tv), dialogClickListener).show()
             }
     }
 
@@ -92,7 +88,7 @@ class TorrentsFileListFragment : Fragment() {
     }
 
     private var dialogClickListener =
-        DialogInterface.OnClickListener { dialog, which ->
+        DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     viewModel.playTorrentLocal(selectedTorrent.id,hash)

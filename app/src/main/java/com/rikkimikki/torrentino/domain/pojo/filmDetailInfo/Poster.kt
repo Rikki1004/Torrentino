@@ -7,7 +7,7 @@ import com.rikkimikki.torrentino.utils.LIBRIA_POSTER_URL
 data class Poster (
     @SerializedName("avatarsUrl")
     @Expose
-    var url: String
+    val url: String
 ){
     val posterKpBig:String
         get() = "https:${url}/600x900"

@@ -7,7 +7,6 @@ import com.rikkimikki.torrentino.domain.pojo.film.FilmsResponse
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
 import com.rikkimikki.torrentino.domain.pojo.search.SearchResponse
 import com.rikkimikki.torrentino.domain.pojo.server.*
-import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponse
 import com.rikkimikki.torrentino.domain.pojo.tvSerie.TvSerieInfoResponce
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -16,15 +15,13 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
-    @Headers("service-id: 25", "Content-Type: application/json") //@Headers("service-id: 25")
+    @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
-    fun  //Observable<PreFilm> getFilms(@Body String params, @Query("operationName") String api_key);
-            getFilms(
+    fun getFilms(
         @Body params: RequestBody,
         @Query("operationName") graph: String
     ): Observable<FilmsResponse>
 
-    //Observable<PreFilm> getFilms(@Body JSONObject json, @Query("operationName") String api_key);
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
     fun getCategories(
@@ -46,8 +43,7 @@ interface ApiService {
         @Query("operationName") graph: String
     ): Observable<TvSerieInfoResponce>
 
-
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("https://{ip}/v3/getTitle")
     fun getAnimeInfo(
         @Path("ip") ip: String,
@@ -61,63 +57,38 @@ interface ApiService {
         @Query("operationName") graph: String
     ): Observable<SearchResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/api")
-    fun getTorrents(
-        @Path("ip") ip: String,
-        @Query("req") req: String,
-        @Query("q") q: String
-    ): Observable<TorrentResponse>
-
-
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8091/player")
     fun playTorrent(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<Response<Void>>
 
-    //Observable<Void> playTorrent(@Body RequestBody params);
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8090/torrents")
     fun remTorrent(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<Response<Void>>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8090/torrents")
     fun getStore(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<List<GetStoreResponse>>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8091/player")
     fun getPosition(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<GetPositionResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8091/player")
     fun getVolume(@Path("ip") ip: String, @Body params: RequestBody): Observable<VolumeResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}:8090/torrents")
-    fun sendControls(
-        @Path("ip") ip: String,
-        @Body params: RequestBody
-    ): Observable<Response<Void>>
-
-    @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{server}/ping")
-    fun findServer(@Path("server") path: String): Observable<FindServerResponse>
-
-
-
-
-    //@Headers("service-id: 25", "Content-Type: application/json")
     @GET("https://{ip}/get_new.php")
     fun searchTorrents(
         @Path("ip") ip: String,
@@ -126,15 +97,14 @@ interface ApiService {
         @Query("q") q: String,
     ): Observable<ResponseBody>
 
-
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @POST("http://{ip}:8090/torrents")
     fun addTorrent(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<AddTorrentResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("https://{ip}/v3/searchTitles")
     fun searchAnime(
         @Path("ip") ip: String,

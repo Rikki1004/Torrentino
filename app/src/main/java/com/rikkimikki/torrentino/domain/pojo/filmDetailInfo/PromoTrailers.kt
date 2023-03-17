@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class PromoTrailers (
     @SerializedName("items")
     @Expose
-    var promoTrailersItems: List<PromoTrailersItem?>
+    val promoTrailersItems: List<PromoTrailersItem?>
 )

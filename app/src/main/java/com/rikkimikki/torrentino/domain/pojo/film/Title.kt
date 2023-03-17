@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Title (
     @SerializedName("russian")
     @Expose
-    var russian: String
+    val russian: String
 )

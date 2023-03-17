@@ -14,10 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_categories">
-        <!--android:name="com.rikkimikki.torrentino.presentation.CategoriesFragment"-->
-
-    </androidx.fragment.app.FragmentContainerView>
+        tools:layout="@layout/fragment_categories"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

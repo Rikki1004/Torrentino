@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Ott (
     @SerializedName("promoTrailers")
     @Expose
-    var promoTrailers: PromoTrailers
+    val promoTrailers: PromoTrailers
 )

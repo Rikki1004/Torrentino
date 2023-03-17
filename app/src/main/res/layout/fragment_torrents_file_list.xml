@@ -2,9 +2,8 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/listViewStoreSeries"
-android:background="@android:color/black"
+android:background="@color/colorBG"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".presentation.ui.torrents.TorrentsFileListFragment">
-
 </ListView>

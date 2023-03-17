@@ -2,6 +2,7 @@ package com.rikkimikki.torrentino.domain.pojo.filmDetailInfo
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.rikkimikki.torrentino.utils.NO_POSTER_URL
 
 data class Film (
     @SerializedName("title")
@@ -26,7 +27,7 @@ data class Film (
 
     @SerializedName("poster")
     @Expose
-    val poster: Poster,
+    val poster: Poster?,
 
     @SerializedName("ott")
     @Expose

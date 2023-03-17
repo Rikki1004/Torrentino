@@ -1,7 +1,6 @@
 package com.rikkimikki.torrentino.presentation.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.rikkimikki.torrentino.domain.pojo.film.PreFilm
 import com.rikkimikki.torrentino.domain.pojo.server.GetStoreResponse
 
 object TorrentsDiffCallback : DiffUtil.ItemCallback<GetStoreResponse>() {

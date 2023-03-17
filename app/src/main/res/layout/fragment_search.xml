@@ -19,7 +19,7 @@
         android:id="@+id/switchAnimeSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="anime"
+        android:text="@string/anime_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

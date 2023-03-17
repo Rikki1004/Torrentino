@@ -10,11 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentSearchBinding
-import com.rikkimikki.torrentino.presentation.MainActivity
-import com.rikkimikki.torrentino.presentation.adapters.FilmsAdapter
 import com.rikkimikki.torrentino.presentation.adapters.SearchAdapter
 import com.rikkimikki.torrentino.presentation.ui.films.FilmDetailFragment
-import com.rikkimikki.torrentino.presentation.ui.films.SelectedCategoryFragment
 
 
 class SearchFragment : Fragment() {
@@ -35,20 +32,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-
-
-        val sv = binding.searchViewSearch
-        sv.setIconifiedByDefault(true)
-        sv.isFocusable = true
-        sv.isIconified = false
-        sv.clearFocus()
-        sv.requestFocusFromTouch()
-
+        initSearchView()
+        initAdapter()
         binding.switchAnimeSearch.setOnCheckedChangeListener{ _, isChecked ->
             isAnime = isChecked
         }
+    }
 
-
+    private fun initAdapter() {
         val recycleView = binding.recycleViewSearch
         adapter = SearchAdapter()
 
@@ -61,13 +52,22 @@ class SearchFragment : Fragment() {
 
         adapter.onFilmClickListener = object : SearchAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
-                val fragment =  FilmDetailFragment.newInstance(id,type,R.id.searchFragmentContainer,isAnime)
+                val fragment = FilmDetailFragment.newInstance(id,type,R.id.searchFragmentContainer,isAnime)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .add(R.id.searchFragmentContainer,fragment)
                     .addToBackStack(null)
                     .commit()
             }
         }
+    }
+
+    private fun initSearchView() {
+        val sv = binding.searchViewSearch
+        sv.setIconifiedByDefault(true)
+        sv.isFocusable = true
+        sv.isIconified = false
+        sv.clearFocus()
+        sv.requestFocusFromTouch()
 
         binding.searchViewSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -85,7 +85,6 @@ class SearchFragment : Fragment() {
             }
         })
     }
-
 
     override fun onDestroyView() {
         _binding = null

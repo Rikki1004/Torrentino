@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -66,12 +65,12 @@ class SearchTorrentsFragment : Fragment() {
     }
 
     private fun setListener(torrents:List<Data>) {
-        binding.scrollViewTorrents.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, i, l ->
+        binding.scrollViewTorrents.setOnItemClickListener { _, _, i, _ ->
             val selectedFilm = torrents[i]
             selectedFilm.poster = poster
             selectedFilm.film = film
             viewModel.addTorrent(selectedFilm)
-        })
+        }
     }
 
     override fun onDestroyView() {

@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class FilmInfoResponse (
     @SerializedName("data")
     @Expose
-    var data: Data
+    val data: Data
 )

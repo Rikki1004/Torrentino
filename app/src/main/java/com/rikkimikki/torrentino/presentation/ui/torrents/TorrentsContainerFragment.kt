@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rikkimikki.torrentino.R
-import com.rikkimikki.torrentino.presentation.ui.search.SearchFragment
 
 class TorrentsContainerFragment : Fragment() {
     private val torrentFragment = TorrentsFragment()
@@ -21,7 +20,6 @@ class TorrentsContainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().supportFragmentManager.beginTransaction()
-            //.add(R.id.torrensFragmentContainer, torrentFragment, null)
             .add(R.id.torrensFragmentContainer, torrentFragment, null)
             .commit()
     }

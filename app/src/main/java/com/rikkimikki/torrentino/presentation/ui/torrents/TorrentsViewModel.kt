@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.domain.pojo.server.GetStoreResponse
 import com.rikkimikki.torrentino.presentation.MainViewModel
@@ -30,7 +30,7 @@ class TorrentsViewModel(application: Application) : AndroidViewModel(application
                     NO_IP
                 ) ?: NO_IP
             else{
-                Toast.makeText(getApplication(), "err", Toast.LENGTH_SHORT).show()
+                toast(getApplication(), R.string.error)
                 NO_IP
             }
         }
@@ -44,7 +44,7 @@ class TorrentsViewModel(application: Application) : AndroidViewModel(application
                     NO_IP
                 ) ?: NO_IP
             else{
-                Toast.makeText(getApplication(), "err", Toast.LENGTH_SHORT).show()
+                toast(getApplication(), R.string.error)
                 NO_IP
             }
         }
@@ -85,20 +85,24 @@ class TorrentsViewModel(application: Application) : AndroidViewModel(application
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        Toast.makeText(getApplication(), "Воспроизведение скоро начнется", Toast.LENGTH_SHORT).show()
+                        toast(getApplication(), R.string.playback_started)
                     },
-                    { throwable ->
-                        Toast.makeText(getApplication(), throwable.toString(), Toast.LENGTH_SHORT).show()
+                    {
+                        toast(getApplication(), R.string.error)
                     }))
     }
 
     fun playTorrentLocal(id:Int,hash: String){
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(
-            Uri.parse("http://" + torServerUrl + ":8090/stream/fname?index=" + id + "&play&save&link=" + hash),
+            Uri.parse("http://$torServerUrl:$BASE_TORRSERVER_PORT/stream/fname?index=$id&play&save&link=$hash"),
             "video/*"
         )
         needLaunchActivity.value = intent
+    }
+
+    fun stopRequests(){
+        disposable.dispose()
     }
 
 

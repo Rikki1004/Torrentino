@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rikkimikki.torrentino.R
-import com.rikkimikki.torrentino.presentation.ui.films.CategoriesFragment
-import com.rikkimikki.torrentino.presentation.ui.films.FilmDetailFragment
 
 class SearchContainerFragment : Fragment() {
     private val searchFragment = SearchFragment()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
