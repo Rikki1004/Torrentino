@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class KPRating (
     @SerializedName("value")
     @Expose
-    var rating: Float
+    val rating: Float
 )

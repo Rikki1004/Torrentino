@@ -2,7 +2,6 @@ package com.rikkimikki.torrentino.presentation
 
 import android.app.Application
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.rikkimikki.torrentino.R
@@ -10,6 +9,7 @@ import com.rikkimikki.torrentino.utils.BASE_SERVER_PORT
 import com.rikkimikki.torrentino.utils.BASE_TORRSERVER_PORT
 import com.rikkimikki.torrentino.utils.toast
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -26,13 +26,14 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
 
     fun initServers(){
         viewModelScope.launch(Dispatchers.IO) {
-            if(!checkServer(sharedPreferences.getString(SERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_TORRSERVER_PORT))
+            if(!checkServer(sharedPreferences.getString(SERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_SERVER_PORT))
                 searchServer()
-            if(!checkServer(sharedPreferences.getString(TORRSERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_SERVER_PORT))
+            if(!checkServer(sharedPreferences.getString(TORRSERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_TORRSERVER_PORT))
                 searchServer()
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun searchServer(){
         var ip: List<String>
         DatagramSocket().use { socket ->
@@ -51,7 +52,7 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val client = Socket()
-                    client.connect(InetSocketAddress(prefix + i.toString(), BASE_SERVER_PORT), 200)
+                    client.connect(InetSocketAddress(prefix + i.toString(), BASE_TORRSERVER_PORT), 200)
                     answerTorrServer.send(i)
                     client.close()
                 }catch (_:Exception){}
@@ -63,7 +64,7 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val client = Socket()
-                    client.connect(InetSocketAddress(prefix + i.toString(), BASE_TORRSERVER_PORT), 200)
+                    client.connect(InetSocketAddress(prefix + i.toString(), BASE_SERVER_PORT), 200)
                     answerServer.send(i)
                     client.close()
                 }catch (_:Exception){}
@@ -71,13 +72,14 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
             }
         }
 
-        val server = prefix+answerServer.receive()
-        val torrServer = prefix+answerTorrServer.receive()
 
-        if (checkServer(server,BASE_TORRSERVER_PORT))
+        val server = if(!answerServer.isEmpty) prefix + answerServer.receive() else LOCAL_IP
+        if (checkServer(server,BASE_SERVER_PORT))
             sharedPreferences.edit().putString(SERVER_IP,server).apply()
 
-        if(checkServer(torrServer,BASE_SERVER_PORT))
+
+        val torrServer = if(!answerTorrServer.isEmpty) prefix + answerTorrServer.receive() else LOCAL_IP
+        if(checkServer(torrServer,BASE_TORRSERVER_PORT))
             sharedPreferences.edit().putString(TORRSERVER_IP,torrServer).apply()
     }
 
@@ -88,12 +90,12 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
             if (client.isConnected) {
                 client.keepAlive = true
                 client.close()
-                toast(getApplication(),R.string.server_find_success)
+                toast(getApplication(),getApplication<Application>().getString(R.string.server_find_success)+" "+ip+":"+port)
                 return true
             }
             client.close()
         } catch (e: IOException) {
-            toast(getApplication(),R.string.аailed_server_contact)
+            toast(getApplication(),R.string.failed_server_contact)
         }
         return false
     }

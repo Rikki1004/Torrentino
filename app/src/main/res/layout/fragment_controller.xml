@@ -32,7 +32,7 @@ tools:context=".presentation.ui.controller.ControllerFragment">
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_weight="1"
-        android:text="@string/cotroller_time00" />
+        android:text="@string/controller_time00" />
 
     <SeekBar
         android:id="@+id/seekBarControllerTime"
@@ -48,7 +48,7 @@ tools:context=".presentation.ui.controller.ControllerFragment">
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
-        android:text="@string/cotroller_time00" />
+        android:text="@string/controller_time00" />
 
 </LinearLayout>
 

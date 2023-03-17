@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rikkimikki.torrentino.R
-import com.rikkimikki.torrentino.databinding.ItemFilmBinding
 import com.rikkimikki.torrentino.databinding.ItemSearchBinding
 import com.rikkimikki.torrentino.domain.pojo.MovieTypes
-import com.rikkimikki.torrentino.domain.pojo.film.Film
 import com.rikkimikki.torrentino.domain.pojo.search.Movie__1
 import com.squareup.picasso.Picasso
 
@@ -39,7 +37,6 @@ class SearchAdapter: ListAdapter<Movie__1, SearchAdapter.SearchViewHolder>(Searc
             Picasso.get().load(R.drawable.placeholder).into(holder.imageViewPoster)
         }
 
-
         holder.itemView.setOnClickListener {
             onFilmClickListener?.onFilmClick(film.id,film.typename)
         }
@@ -54,8 +51,6 @@ class SearchAdapter: ListAdapter<Movie__1, SearchAdapter.SearchViewHolder>(Searc
         val textViewReleaseDate= viewBinding.textViewSearchReleaseDate
         val imageViewPoster= viewBinding.imageViewSearchImage
     }
-
-
 
     interface OnFilmClickListener {
         fun onFilmClick(id: Int, type: String)

@@ -6,29 +6,29 @@ import com.google.gson.annotations.SerializedName
 data class Film (
     @SerializedName("__typename")
     @Expose
-    var type: String,
+    val type: String,
 
     @SerializedName("id")
     @Expose
-    var id: String,
+    val id: String,
 
     @SerializedName("url")
     @Expose
-    var url: String,
+    val url: String,
 
     @SerializedName("title")
     @Expose
-    var title: Title,
+    val title: Title,
 
     @SerializedName("genres")
     @Expose
-    var janre: List<Genre>,
+    val janre: List<Genre>,
 
     @SerializedName("poster")
     @Expose
-    var poster: Poster?,
+    val poster: Poster?,
 
     @SerializedName("rating")
     @Expose
-    var rating: Rating
+    val rating: Rating
 )

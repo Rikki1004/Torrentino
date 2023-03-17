@@ -45,18 +45,22 @@ class SelectedCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[CategoriesViewModel::class.java]
-
         binding.toolbarCategory.title = title
 
+        initAdapter()
+        viewModel.films.observe(viewLifecycleOwner){
+            adapter.addFilms(it)
+        }
+        viewModel.getFilmsWithOffset(genre,0)
+    }
+
+    private fun initAdapter() {
         val recycleView = binding.RecycleViewSelectedCategory
         adapter = FilmsAdapter()
 
         recycleView.layoutManager = GridLayoutManager(context, 2)
         recycleView.adapter = adapter
 
-        viewModel.films.observe(viewLifecycleOwner){
-            adapter.addFilms(it)
-        }
         adapter.onReachEndListener = object :FilmsAdapter.OnReachEndListener{
             override fun onReachEnd() {
                 offset+=FILMS_COUNT
@@ -72,8 +76,6 @@ class SelectedCategoryFragment : Fragment() {
                     .commit()
             }
         }
-
-        viewModel.getFilmsWithOffset(genre,0)
     }
 
     override fun onDestroyView() {

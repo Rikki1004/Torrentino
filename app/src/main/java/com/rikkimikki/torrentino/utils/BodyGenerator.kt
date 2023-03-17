@@ -10,14 +10,9 @@ fun generateBody(operationName:String,variables:String,query:String): RequestBod
     val jsonObject = JSONObject()
     try {
         jsonObject.put("operationName", operationName)
-        jsonObject.put(
-            "variables",
-            JSONObject(variables)
-        )
-        jsonObject.put(
-            "query",
-            query
-        )
+        jsonObject.put("variables",JSONObject(variables))
+        jsonObject.put("query",query)
+
         body = jsonObject.toString()
             .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
     } catch (e: Exception) {
@@ -112,7 +107,7 @@ fun getPlayTorrentBody(title: String, chosenSeries: Int, url:String, hash:String
         jsonObject.put("ids", "" + chosenSeries)
         jsonObject.put("name", title)
         jsonObject.put("hash", hash)
-        jsonObject.put("m3u", ("http://" + url + ":8090/stream/fname?index=" + chosenSeries + "&play&save&link=" + hash))
+        jsonObject.put("m3u", ("http://$url:$BASE_TORRSERVER_PORT/stream/no$chosenSeries?index=$chosenSeries&play&save&link=$hash"))
 
         body = jsonObject.toString()
             .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
@@ -121,27 +116,6 @@ fun getPlayTorrentBody(title: String, chosenSeries: Int, url:String, hash:String
     }
     return body!!
 }
-
-fun getBodyPlayTorrent(serverUrl:String,hash:String,title:String): RequestBody {
-    var body: RequestBody? = null
-    val jsonObject = JSONObject()
-    try {
-        jsonObject.put("playlist", "")
-        jsonObject.put("action", "play")
-        jsonObject.put("ids", "1")
-        jsonObject.put("name", title)
-        jsonObject.put(
-            "m3u",
-            "http://" + serverUrl + ":8090/stream/fname?index=1&play&save&link=" + hash
-        )
-        body = jsonObject.toString()
-            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-    return body!!
-}
-
 
 fun generateCustomBody(vararg args: Pair<String,String>): RequestBody {
     var body: RequestBody? = null

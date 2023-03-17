@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 data class MovieListBySlug (
     @SerializedName("movies")
     @Expose
-    var movie: Movies,
+    val movie: Movies,
 
     @SerializedName("name")
     @Expose
-    var name: String
+    val name: String
 )

@@ -41,7 +41,7 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTitle"
         app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitleName"
         app:layout_constraintTop_toBottomOf="@+id/imageViewBigPoster" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -52,7 +52,7 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -74,12 +74,12 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/colorTEXT"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewOrigTitleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info_orig_title"
@@ -99,12 +99,12 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/colorTEXT"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewOrigTitle" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textViewRatingName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/film_info_rating"
@@ -124,12 +124,12 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/colorTEXT"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textViewReleaseDateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/film_release_date"
@@ -150,12 +150,12 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/colorTEXT"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textViewOverviewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/film_overview"
@@ -169,7 +169,7 @@ tools:context=".presentation.ui.films.FilmDetailFragment">
         android:text="@string/text_loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewOverviewName" />
 
     <ImageView
         android:id="@+id/imageViewTrallerPreview"

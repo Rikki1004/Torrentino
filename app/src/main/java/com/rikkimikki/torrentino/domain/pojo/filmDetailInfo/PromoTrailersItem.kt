@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class PromoTrailersItem (
     @SerializedName("streamUrl")
     @Expose
-    var promoTrailers: String
+    val promoTrailers: String
 )

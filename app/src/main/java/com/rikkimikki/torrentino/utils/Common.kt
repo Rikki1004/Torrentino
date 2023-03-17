@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import com.rikkimikki.torrentino.R
 
 const val LIBRIA_BASE_URL = "api.anilibria.tv"
 const val LIBRIA_POSTER_URL = "https://dl3.anilibria.cf"
@@ -16,5 +15,10 @@ const val BASE_TORRSERVER_PORT = 8090
 fun toast(application: Application,string: Int){
     Handler(Looper.getMainLooper()).post {
         Toast.makeText(application, application.getString(string), Toast.LENGTH_SHORT).show()
+    }
+}
+fun toast(application: Application,text: String){
+    Handler(Looper.getMainLooper()).post {
+        Toast.makeText(application, text, Toast.LENGTH_SHORT).show()
     }
 }

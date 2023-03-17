@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 data class KinopoiskReviews (
     @SerializedName("count")
     @Expose
-    var count :Int,
+    val count :Int,
 
     @SerializedName("value")
     @Expose
-    var value: Float
+    val value: Float
 )

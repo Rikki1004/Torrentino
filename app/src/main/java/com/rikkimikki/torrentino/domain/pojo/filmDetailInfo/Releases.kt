@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Releases (
     @SerializedName("releases")
     @Expose
-    var releases: List<Release>
+    val releases: List<Release>
 )

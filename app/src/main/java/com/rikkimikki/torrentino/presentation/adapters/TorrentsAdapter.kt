@@ -10,7 +10,6 @@ import com.rikkimikki.torrentino.databinding.ItemTorrentBinding
 import com.rikkimikki.torrentino.domain.pojo.server.GetStoreResponse
 import com.squareup.picasso.Picasso
 
-
 class TorrentsAdapter: ListAdapter<GetStoreResponse, TorrentsAdapter.TorrentViewHolder>(TorrentsDiffCallback){
 
     var onTorrentClickListener: OnTorrentClickListener? = null
@@ -39,14 +38,12 @@ class TorrentsAdapter: ListAdapter<GetStoreResponse, TorrentsAdapter.TorrentView
                 onTorrentClickListener?.onPlayClick(torrent)
             }
         }
-
     }
 
     inner class TorrentViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var viewBinding = ItemTorrentBinding.bind(itemView)
     }
-
 
     interface OnTorrentClickListener {
         fun onPlayClick(torrent:GetStoreResponse)

@@ -78,17 +78,17 @@ class FilmDetailFragment : Fragment() {
         viewModel.anime.observe(viewLifecycleOwner){anime ->
             val film = anime.toFilm()
             configurate(film)
-            binding.playButton.setOnClickListener(View.OnClickListener {
+            binding.playButton.setOnClickListener {
                 val fragment = SearchTorrentsFragment.newInstance(
                     film.title.russian,
-                    film.poster?.posterLibria?:NO_POSTER_URL,
+                    film.poster?.posterLibria ?: NO_POSTER_URL,
                     anime.torrents.toData()
                 )
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .add(container,fragment)
+                    .add(container, fragment)
                     .addToBackStack(null)
                     .commit()
-            })
+            }
         }
     }
 
@@ -127,13 +127,13 @@ class FilmDetailFragment : Fragment() {
             }
 
             if (!isAnime)
-                binding.playButton.setOnClickListener(View.OnClickListener {
-                    val fragment = SearchTorrentsFragment.newInstance(film.title.russian,poster)
+                binding.playButton.setOnClickListener {
+                    val fragment = SearchTorrentsFragment.newInstance(film.title.russian, poster)
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .add(container,fragment)
+                        .add(container, fragment)
                         .addToBackStack(null)
                         .commit()
-                })
+                }
         }
     }
 

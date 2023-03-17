@@ -5,17 +5,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
+import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.data.ApiFactory
-import com.rikkimikki.torrentino.domain.pojo.category.Category
 import com.rikkimikki.torrentino.domain.pojo.server.GetPositionResponse
 import com.rikkimikki.torrentino.presentation.MainViewModel.Companion.PREF_SERVER
 import com.rikkimikki.torrentino.presentation.MainViewModel.Companion.SERVER_IP
 import com.rikkimikki.torrentino.utils.SingleLiveData
 import com.rikkimikki.torrentino.utils.getControllerBody
+import com.rikkimikki.torrentino.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -74,7 +73,18 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
         disposable.add(apiService.playTorrent(serverUrl, getControllerBody(control,position))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe())
+            .subscribe({}) {
+                toast(getApplication(), R.string.error)
+            })
+    }
+
+    fun stopRequests(){
+        disposable.dispose()
+    }
+
+    override fun onCleared() {
+        disposable.dispose()
+        super.onCleared()
     }
 
     companion object{

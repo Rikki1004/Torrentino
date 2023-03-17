@@ -3,7 +3,6 @@ package com.rikkimikki.torrentino.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.ActivityMainBinding
@@ -11,7 +10,6 @@ import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.search.SearchContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsContainerFragment
-import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding

@@ -7,8 +7,8 @@ import org.jsoup.nodes.Document
 
 fun parseSearch(html:String) : TorrentResponse{
     val response = mutableListOf<Data>()
-    val html = "<table>$html</table>"
-    val document: Document = Jsoup.parse(html)
+    val newHtml = "<table>$html</table>"
+    val document: Document = Jsoup.parse(newHtml)
     for (i in document.select("tr.gai, tr.tum")){
         val children = i.select("td")
         val childrenR = children[1].select("a")

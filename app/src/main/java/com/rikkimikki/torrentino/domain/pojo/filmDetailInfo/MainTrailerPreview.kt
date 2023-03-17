@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class MainTrailerPreview (
     @SerializedName("avatarsUrl")
     @Expose
-    var url: String
+    val url: String
 ){
     val preview: String
         get() = "https:${url}/600x380"

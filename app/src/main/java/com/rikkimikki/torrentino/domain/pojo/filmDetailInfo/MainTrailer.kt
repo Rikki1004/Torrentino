@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 data class MainTrailer (
     @SerializedName("streamUrl")
     @Expose
-    var url: String,
+    val url: String,
 
     @SerializedName("preview")
     @Expose
-    var mainTrallerPreview: MainTrailerPreview
+    val mainTrallerPreview: MainTrailerPreview
 )
