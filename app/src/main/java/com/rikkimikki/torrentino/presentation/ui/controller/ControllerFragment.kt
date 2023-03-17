@@ -29,6 +29,9 @@ class ControllerFragment : Fragment() {
         initObservers()
         initListeners()
 
+        viewModel.getPosition()
+        viewModel.getVolume()
+
     }
 
     private fun initListeners() {
@@ -39,18 +42,18 @@ class ControllerFragment : Fragment() {
             buttonControllerPlay.setOnClickListener{ viewModel.sendControls("pause") }
             buttonControllerMute.setOnClickListener{ viewModel.sendControls("setMute") }
             seekBarControllerTime.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                    viewModel.sendControls("setPosition", (i / 100.0).toString())
-                }
+                override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {}
                 override fun onStartTrackingTouch(seekBar: SeekBar) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar) {
+                    viewModel.sendControls("setPosition", (seekBar.progress / 100.0).toString())
+                }
             })
             seekBarControllerVolume.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                    viewModel.sendControls("setVolume", i.toString())
-                }
+                override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {}
                 override fun onStartTrackingTouch(seekBar: SeekBar) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar) {
+                    viewModel.sendControls("setVolume", seekBar.progress.toString())
+                }
             })
         }
 
@@ -66,9 +69,9 @@ class ControllerFragment : Fragment() {
             binding.textViewControllerStartTime.text = it.time
             binding.seekBarControllerTime.progress = (it.position.toFloat()*100).toInt()
             if (it.status == STATUS_PLAY)
-                binding.buttonControllerStop.setImageResource(android.R.drawable.ic_media_pause)
+                binding.buttonControllerPlay.setImageResource(android.R.drawable.ic_media_pause)
             else
-                binding.buttonControllerStop.setImageResource(android.R.drawable.ic_media_pause)
+                binding.buttonControllerPlay.setImageResource(android.R.drawable.ic_media_play)
         }
     }
 

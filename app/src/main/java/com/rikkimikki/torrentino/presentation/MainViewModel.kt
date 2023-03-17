@@ -46,7 +46,7 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
             val answerServer = Channel<Int>()
             val answerTorrServer = Channel<Int>()
 
-            for (i in 0..254){
+            for (i in 0..256){
                 viewModelScope.launch(Dispatchers.IO) {
                     try {
                         val client = Socket()
@@ -58,7 +58,7 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
                 }
             }
 
-            for (i in 0..254){
+            for (i in 0..256){
                 viewModelScope.launch(Dispatchers.IO) {
                     try {
                         val client = Socket()

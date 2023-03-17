@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<ImageView
+    android:id="@+id/imageViewStorePoster"
+    android:layout_width="wrap_content"
+    android:adjustViewBounds="true"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/placeholder"
+    android:contentDescription="@string/film_poster" />
+
+
+<TextView
+    android:id="@+id/textViewStoreTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
+    android:text="@string/text_loading"
+    app:layout_constraintStart_toEndOf="@+id/imageViewStorePoster"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_begin="125dp" />
+
+<TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/store_size"
+    app:layout_constraintStart_toEndOf="@+id/imageViewStorePoster"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStoreTitle" />
+
+<TextView
+    android:id="@+id/textViewStoreSize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:text="@string/text_loading"
+    app:layout_constraintStart_toStartOf="@+id/textView5"
+    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+<TextView
+    android:id="@+id/textView9"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="28dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/store_speed"
+    app:layout_constraintStart_toEndOf="@+id/textView5"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStoreTitle" />
+
+<TextView
+    android:id="@+id/textViewStoreSpeed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:text="@string/text_loading"
+    app:layout_constraintStart_toStartOf="@+id/textView9"
+    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+<TextView
+    android:id="@+id/textView13"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="28dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/store_peers"
+    app:layout_constraintStart_toEndOf="@+id/textView9"
+    app:layout_constraintTop_toBottomOf="@+id/textViewStoreTitle" />
+
+<TextView
+    android:id="@+id/textViewStorePeers"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:text="@string/text_loading"
+    app:layout_constraintStart_toStartOf="@+id/textView13"
+    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+<Button
+    android:id="@+id/buttonStoreDelete"
+    android:layout_width="92dp"
+    android:layout_height="37dp"
+    android:layout_marginEnd="12dp"
+    android:text="@string/store_delete"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<Button
+    android:id="@+id/buttonStorePlay"
+    android:layout_width="91dp"
+    android:layout_height="36dp"
+    android:layout_marginEnd="28dp"
+    android:text="@string/store_play"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/buttonStoreDelete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

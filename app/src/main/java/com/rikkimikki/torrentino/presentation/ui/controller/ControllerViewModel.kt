@@ -57,7 +57,7 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun getPosition() {
-        disposable.add(apiService.getPosition(serverUrl, getControllerBody("getVolumeJson"))
+        disposable.add(apiService.getPosition(serverUrl, getControllerBody("getPosition"))
             .subscribeOn(Schedulers.io())
             .repeatWhen{completed -> completed.delay(1, TimeUnit.SECONDS)}
             .observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +71,7 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun sendControls(control: String,position: String="") {
-        disposable.add(apiService.getPosition(serverUrl, getControllerBody(control,position))
+        disposable.add(apiService.playTorrent(serverUrl, getControllerBody(control,position))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe())

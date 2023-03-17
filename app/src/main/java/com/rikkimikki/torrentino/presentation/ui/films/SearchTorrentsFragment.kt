@@ -48,7 +48,7 @@ class SearchTorrentsFragment : Fragment() {
 
         torrents?.let {
             initAdapter(it)
-        } ?: {
+        }?: run{
             viewModel.torrents.observe(viewLifecycleOwner){
                 initAdapter(it.data)
             }

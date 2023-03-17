@@ -9,12 +9,13 @@ import com.rikkimikki.torrentino.databinding.ActivityMainBinding
 import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.search.SearchContainerFragment
+import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private val controllerFragment = ControllerFragment()
-    private val torrentsFragment = TorrentsFragment()
+    private val torrentsFragment = TorrentsContainerFragment()
     private val searchFragment = SearchContainerFragment()
     private val filmsFragment = FilmsContainerFragment()
     private lateinit var viewModel: MainViewModel

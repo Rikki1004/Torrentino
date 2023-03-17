@@ -71,7 +71,7 @@ interface ApiService {
 
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
+    @POST("http://{ip}:8091/player")
     fun playTorrent(
         @Path("ip") ip: String,
         @Body params: RequestBody
@@ -93,14 +93,14 @@ interface ApiService {
     ): Observable<List<GetStoreResponse>>
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
+    @POST("http://{ip}:8091/player")
     fun getPosition(
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<GetPositionResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
+    @POST("http://{ip}:8091/player")
     fun getVolume(@Path("ip") ip: String, @Body params: RequestBody): Observable<VolumeResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")

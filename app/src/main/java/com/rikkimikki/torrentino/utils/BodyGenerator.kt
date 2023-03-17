@@ -96,6 +96,32 @@ fun getControllerBody(action: String,position: String=""): RequestBody {
     return body!!
 }
 
+fun getTorrentsBody(): RequestBody {
+    return generateCustomBody("action" to "list")
+}
+fun getDeleteTorrentsBody(hash: String): RequestBody {
+    return generateCustomBody("action" to "rem","hash" to hash)
+}
+
+fun getPlayTorrentBody(title: String, chosenSeries: Int, url:String, hash:String): RequestBody {
+    var body: RequestBody? = null
+    val jsonObject = JSONObject()
+    try {
+        jsonObject.put("playlist", "")
+        jsonObject.put("action", "play")
+        jsonObject.put("ids", "" + chosenSeries)
+        jsonObject.put("name", title)
+        jsonObject.put("hash", hash)
+        jsonObject.put("m3u", ("http://" + url + ":8090/stream/fname?index=" + chosenSeries + "&play&save&link=" + hash))
+
+        body = jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return body!!
+}
+
 fun getBodyPlayTorrent(serverUrl:String,hash:String,title:String): RequestBody {
     var body: RequestBody? = null
     val jsonObject = JSONObject()
@@ -124,10 +150,8 @@ fun generateCustomBody(vararg args: Pair<String,String>): RequestBody {
         for (i in args){
             jsonObject.put(i.first,i.second)
         }
-        body = RequestBody.create(
-            "application/json; charset=utf-8".toMediaTypeOrNull(),
-            jsonObject.toString()
-        )
+        body = jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
     } catch (e: Exception) {
         e.printStackTrace()
     }
