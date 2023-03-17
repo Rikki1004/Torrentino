@@ -49,7 +49,7 @@ class CategoryAdapter(
             }
         }
         holder.textViewButtonAll.setOnClickListener {
-            onAllFilmButtonClickListener?.onButtonClick(category.currentFilters.singleSelectFilterValues[0].value)
+            onAllFilmButtonClickListener?.onButtonClick(category.currentFilters.singleSelectFilterValues[0].value,category.name)
         }
 
         holder.recyclerView.layoutManager = LinearLayoutManager(context).apply {
@@ -70,7 +70,7 @@ class CategoryAdapter(
         fun onFilmClick(id: Int, type: String)
     }
     interface OnAllFilmButtonClickListener {
-        fun onButtonClick(genre: String)
+        fun onButtonClick(genre: String,title:String)
     }
     companion object{
         const val VIEW_TYPE = 1

@@ -7,4 +7,7 @@ data class Poster (
     @SerializedName("avatarsUrl")
     @Expose
     var url: String
-)
+){
+    val posterKpSmall:String
+        get() = "https:$url/136x204"
+}

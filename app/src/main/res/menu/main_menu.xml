@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_films"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Фильмы"  />
+        android:icon="@drawable/home"
+        android:title="@string/menu_films"  />
     <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Поиск" />
+        android:icon="@drawable/search"
+        android:title="@string/menu_search" />
     <item
         android:id="@+id/navigation_controller"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Пульт" />
+        android:icon="@drawable/controller"
+        android:title="@string/menu_controller" />
     <item
         android:id="@+id/navigation_torrents"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Торренты" />
+        android:icon="@drawable/torrents"
+        android:title="@string/menu_torrents" />
 </menu>

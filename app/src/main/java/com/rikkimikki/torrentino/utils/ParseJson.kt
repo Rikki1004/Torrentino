@@ -9,8 +9,6 @@ fun dataToMiniTorrents(data:String):List<MiniTorrent>{
     val result = arrayListOf<MiniTorrent>()
     try {
         val torrents: JSONArray = JSONObject(data).getJSONObject("TorrServer").getJSONArray("Files")
-        if (torrents.length() == 0)
-            result.add(MiniTorrent("film",1))
         for (i in 0 until torrents.length()) {
             result.add(
                 MiniTorrent(
@@ -19,7 +17,7 @@ fun dataToMiniTorrents(data:String):List<MiniTorrent>{
             ))
         }
     } catch (e: JSONException) {
-        e.printStackTrace()
+        result.add(MiniTorrent("film",1))
     }
     return result
 }

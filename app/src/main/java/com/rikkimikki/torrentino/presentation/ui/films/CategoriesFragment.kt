@@ -47,9 +47,9 @@ class CategoriesFragment : Fragment() {
             }
         }
         adapter.onAllFilmButtonClickListener = object : CategoryAdapter.OnAllFilmButtonClickListener{
-            override fun onButtonClick(genre: String) {
+            override fun onButtonClick(genre: String,title:String) {
 
-                val fragment = SelectedCategoryFragment.newInstance(genre)
+                val fragment = SelectedCategoryFragment.newInstance(genre,title)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .add(R.id.filmsFragmentContainer,fragment)
                     .addToBackStack(null)

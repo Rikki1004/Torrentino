@@ -3,6 +3,7 @@ package com.rikkimikki.torrentino.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.ActivityMainBinding
@@ -25,31 +26,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        supportActionBar?.hide()
         setContentView(binding.root)
         setupFragments()
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         viewModel.initServers()
-
-
-
-        /*val apiService = ApiFactory.getApiService()
-
-        val disposable = apiService.searchTorrents(
-            //"tsrvwc.ru/get_new.php?secret=tsrvwc&hash=&q=search/0/0/000/2/","митчелы")
-            "tsrvwc.ru","tsrvwc","","search/0/0/000/2/митчелы")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                parseSearch(it.string())
-            }) { throwable ->
-                throwable.printStackTrace()
-                Toast.makeText(this, "ошибка", Toast.LENGTH_SHORT).show()
-            }
-*/
-
-
     }
 
     private fun setupFragments() {

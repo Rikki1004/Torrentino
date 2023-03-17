@@ -56,7 +56,6 @@ class ControllerFragment : Fragment() {
                 }
             })
         }
-
     }
 
     private fun initObservers(){

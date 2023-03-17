@@ -26,7 +26,7 @@ data class Film (
 
     @SerializedName("poster")
     @Expose
-    var poster: Poster,
+    var poster: Poster?,
 
     @SerializedName("rating")
     @Expose

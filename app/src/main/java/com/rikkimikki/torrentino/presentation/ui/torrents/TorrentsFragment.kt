@@ -57,6 +57,7 @@ class TorrentsFragment : Fragment() {
 
         viewModel.getTorrents().observe(viewLifecycleOwner){
             adapter.submitList(it)
+            println("aaa")
         }
     }
 

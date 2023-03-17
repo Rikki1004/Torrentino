@@ -28,7 +28,10 @@ class FilmsAdapter: ListAdapter<PreFilm, FilmsAdapter.FilmViewHolder>(FilmsDiffC
         holder.textViewTitle.text = film.title.russian
         holder.textViewGenre.text = film.janre[0].genre
         holder.textViewRating.text = film.rating.kpRating.rating.toString()
-        Picasso.get().load("https:"+film.poster.url+"/136x204").into(holder.imageViewPoster)
+        film.poster?.let {
+            Picasso.get().load(it.posterKpSmall).into(holder.imageViewPoster)
+        } ?: Picasso.get().load(R.drawable.placeholder).into(holder.imageViewPoster)
+
         if (position > currentList.size - 10 && onReachEndListener != null) {
             onReachEndListener?.onReachEnd()
         }

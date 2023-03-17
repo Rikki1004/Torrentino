@@ -30,4 +30,10 @@
     <string name="search">Поиск</string>
     <string name="All">Все</string>
     <string name="films">Фильмы</string>
+    <string name="menu_films">Фильмы</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_controller">Пульт</string>
+    <string name="menu_torrents">Торренты</string>
+    <string name="аailed_server_contact">Не удалось связаться с сервером</string>
+    <string name="server_find_success">Сервер найден</string>
 </resources>

@@ -28,7 +28,10 @@ class TorrentsAdapter: ListAdapter<GetStoreResponse, TorrentsAdapter.TorrentView
             textViewStorePeers.text = torrent.allPeers
             textViewStoreSize.text ="%.2f".format(torrent.torrent_size / 1024 / 1024 / 1024) + " Gb"
             textViewStoreSpeed.text = torrent.uploadSpeed
-            Picasso.get().load(torrent.poster).placeholder(R.drawable.placeholder).into(imageViewStorePoster)
+            if (torrent.poster.isNotBlank())
+                Picasso.get().load(torrent.poster).placeholder(R.drawable.placeholder).into(imageViewStorePoster)
+            else
+                Picasso.get().load(R.drawable.placeholder).into(imageViewStorePoster)
             buttonStoreDelete.setOnClickListener {
                 onTorrentClickListener?.onDeleteClick(torrent)
             }
