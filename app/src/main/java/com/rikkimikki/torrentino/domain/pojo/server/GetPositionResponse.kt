@@ -22,5 +22,5 @@ data class GetPositionResponse (
 
     @SerializedName("title")
     @Expose
-    val title: String
+    val title: String?
 )

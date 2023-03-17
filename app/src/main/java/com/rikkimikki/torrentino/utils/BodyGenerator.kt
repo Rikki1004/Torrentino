@@ -82,6 +82,20 @@ fun getAddTorrentBody(magnet: String,poster:String,title:String): RequestBody {
     return body!!
 }
 
+fun getControllerBody(action: String,position: String=""): RequestBody {
+    var body: RequestBody? = null
+    val jsonObject = JSONObject()
+    try {
+        jsonObject.put("action", action)
+        jsonObject.put("position", position)
+        body = jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return body!!
+}
+
 fun getBodyPlayTorrent(serverUrl:String,hash:String,title:String): RequestBody {
     var body: RequestBody? = null
     val jsonObject = JSONObject()

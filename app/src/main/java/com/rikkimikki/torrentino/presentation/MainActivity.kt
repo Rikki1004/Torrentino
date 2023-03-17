@@ -1,24 +1,15 @@
 package com.rikkimikki.torrentino.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.rikkimikki.torrentino.R
-import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.databinding.ActivityMainBinding
-import com.rikkimikki.torrentino.domain.pojo.torrent.Data
-import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponse
 import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.search.SearchContainerFragment
-import com.rikkimikki.torrentino.presentation.ui.search.SearchFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
-import com.rikkimikki.torrentino.utils.parseSearch
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -26,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val torrentsFragment = TorrentsFragment()
     private val searchFragment = SearchContainerFragment()
     private val filmsFragment = FilmsContainerFragment()
+    private lateinit var viewModel: MainViewModel
 
     var activeFragment: Fragment = filmsFragment
 
@@ -34,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupFragments()
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        viewModel.initServers()
 
 
 
