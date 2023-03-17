@@ -1,8 +1,11 @@
 package com.rikkimikki.torrentino.domain.pojo.torrent
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Data (
     @SerializedName("link")
     @Expose
@@ -10,7 +13,7 @@ data class Data (
 
     @SerializedName("film")
     @Expose
-    val film: String,
+    var film: String,
 
     @SerializedName("magnetLink")
     @Expose
@@ -22,9 +25,11 @@ data class Data (
 
     @SerializedName("size")
     @Expose
-    val size: String
+    val size: String,
 
-){
+    var poster:String = ""
+
+):Parcelable{
     override fun toString(): String {
         return "$film - $size ($peers)"
     }

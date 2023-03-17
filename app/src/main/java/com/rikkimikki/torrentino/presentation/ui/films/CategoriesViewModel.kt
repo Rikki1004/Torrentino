@@ -1,10 +1,13 @@
 package com.rikkimikki.torrentino.presentation.ui.films
 
 import android.R
+import android.app.Application
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.rikkimikki.torrentino.data.ApiFactory
+import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponse
 import com.rikkimikki.torrentino.domain.pojo.category.Category
 import com.rikkimikki.torrentino.domain.pojo.film.PreFilm
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Film
@@ -14,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class CategoriesViewModel : ViewModel(){
+class CategoriesViewModel(application: Application) : AndroidViewModel(application){
     private val disposable = CompositeDisposable()
     private val apiService = ApiFactory.getApiService()
     private val categories = SingleLiveData<List<Category>>()
@@ -22,6 +25,7 @@ class CategoriesViewModel : ViewModel(){
     var films = SingleLiveData<List<PreFilm>>()
     val film = SingleLiveData<Film>()
     val tvSerie = SingleLiveData<TvSerieInfoResponce>()
+    val anime = SingleLiveData<AnimeResponse>()
 
     fun getCategories():SingleLiveData<List<Category>>{
         disposable.add(apiService.getCategories(getCategoriesBody(), "MovieListCategory")
@@ -94,6 +98,20 @@ class CategoriesViewModel : ViewModel(){
                 { throwable ->
                     println(throwable.toString())
                 }))
+    }
+
+    fun getAnime(id: Int) {
+        disposable.add(apiService.getAnimeInfo(LIBRIA_BASE_URL, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ searchResponse ->
+                val data = searchResponse
+
+                anime.postValue(data)
+            }) { throwable ->
+                throwable.printStackTrace()
+                Toast.makeText(getApplication(), "ошибка", Toast.LENGTH_SHORT).show()
+            })
     }
 
 }

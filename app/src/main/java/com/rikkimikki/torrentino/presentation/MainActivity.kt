@@ -1,30 +1,24 @@
 package com.rikkimikki.torrentino.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.rikkimikki.torrentino.R
-import com.rikkimikki.torrentino.data.ApiFactory
 import com.rikkimikki.torrentino.databinding.ActivityMainBinding
-import com.rikkimikki.torrentino.domain.pojo.torrent.Data
-import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponse
 import com.rikkimikki.torrentino.presentation.ui.controller.ControllerFragment
 import com.rikkimikki.torrentino.presentation.ui.films.FilmsContainerFragment
-import com.rikkimikki.torrentino.presentation.ui.search.SearchFragment
+import com.rikkimikki.torrentino.presentation.ui.search.SearchContainerFragment
+import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsContainerFragment
 import com.rikkimikki.torrentino.presentation.ui.torrents.TorrentsFragment
-import com.rikkimikki.torrentino.utils.parseSearch
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private val controllerFragment = ControllerFragment()
-    private val torrentsFragment = TorrentsFragment()
-    private val searchFragment = SearchFragment()
+    private val torrentsFragment = TorrentsContainerFragment()
+    private val searchFragment = SearchContainerFragment()
     private val filmsFragment = FilmsContainerFragment()
+    private lateinit var viewModel: MainViewModel
 
     var activeFragment: Fragment = filmsFragment
 
@@ -33,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupFragments()
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        viewModel.initServers()
 
 
 
@@ -57,9 +55,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupFragments() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.mainContainer, filmsFragment, null)
-            add(R.id.mainContainer, torrentsFragment, null).hide(torrentsFragment)
-            add(R.id.mainContainer, searchFragment, null).hide(searchFragment)
-            add(R.id.mainContainer, controllerFragment, null).hide(controllerFragment)
+            //add(R.id.mainContainer, torrentsFragment, null).hide(torrentsFragment)
+            //add(R.id.mainContainer, searchFragment, null).hide(searchFragment)
+            //add(R.id.mainContainer, controllerFragment, null).hide(controllerFragment)
         }.commit()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -70,17 +68,29 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_controller -> {
-                    supportFragmentManager.beginTransaction().hide(activeFragment).show(controllerFragment).commit()
+                    if (controllerFragment.isAdded)
+                        supportFragmentManager.beginTransaction().hide(activeFragment).show(controllerFragment).commit()
+                    else
+                        supportFragmentManager.beginTransaction().hide(activeFragment)
+                            .add(R.id.mainContainer,controllerFragment,null).commit()
                     activeFragment = controllerFragment
                     true
                 }
                 R.id.navigation_search -> {
-                    supportFragmentManager.beginTransaction().hide(activeFragment).show(searchFragment).commit()
+                    if (searchFragment.isAdded)
+                        supportFragmentManager.beginTransaction().hide(activeFragment).show(searchFragment).commit()
+                    else
+                        supportFragmentManager.beginTransaction().hide(activeFragment)
+                            .add(R.id.mainContainer,searchFragment,null).commit()
                     activeFragment = searchFragment
                     true
                 }
                 R.id.navigation_torrents -> {
-                    supportFragmentManager.beginTransaction().hide(activeFragment).show(torrentsFragment).commit()
+                    if (torrentsFragment.isAdded)
+                        supportFragmentManager.beginTransaction().hide(activeFragment).show(torrentsFragment).commit()
+                    else
+                        supportFragmentManager.beginTransaction().hide(activeFragment)
+                            .add(R.id.mainContainer,torrentsFragment,null).commit()
                     activeFragment = torrentsFragment
                     true
                 }

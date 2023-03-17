@@ -60,9 +60,8 @@ class SelectedCategoryFragment : Fragment() {
         }
         adapter.onFilmClickListener = object :FilmsAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
-                val fragment =  FilmDetailFragment.newInstance(id,type)
+                val fragment =  FilmDetailFragment.newInstance(id,type,R.id.filmsFragmentContainer)
                 requireActivity().supportFragmentManager.beginTransaction()
-                    //.hide(this@SelectedCategoryFragment)
                     .add(R.id.filmsFragmentContainer,fragment)
                     .addToBackStack(null)
                     .commit()

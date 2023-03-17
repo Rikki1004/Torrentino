@@ -1,9 +1,11 @@
 package com.rikkimikki.torrentino.data
 
+import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponse
+import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponseMain
 import com.rikkimikki.torrentino.domain.pojo.category.CategoryResponse
 import com.rikkimikki.torrentino.domain.pojo.film.FilmsResponse
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
-import com.rikkimikki.torrentino.domain.pojo.search.SearchResponce
+import com.rikkimikki.torrentino.domain.pojo.search.SearchResponse
 import com.rikkimikki.torrentino.domain.pojo.server.*
 import com.rikkimikki.torrentino.domain.pojo.torrent.TorrentResponse
 import com.rikkimikki.torrentino.domain.pojo.tvSerie.TvSerieInfoResponce
@@ -44,12 +46,20 @@ interface ApiService {
         @Query("operationName") graph: String
     ): Observable<TvSerieInfoResponce>
 
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @GET("https://{ip}/v3/getTitle")
+    fun getAnimeInfo(
+        @Path("ip") ip: String,
+        @Query("id") id: Int,
+    ): Observable<AnimeResponse>
+
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
     fun getSeacrhRequest(
         @Body params: RequestBody,
         @Query("operationName") graph: String
-    ): Observable<SearchResponce>
+    ): Observable<SearchResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{ip}/api")
@@ -59,15 +69,9 @@ interface ApiService {
         @Query("q") q: String
     ): Observable<TorrentResponse>
 
-    @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}:8090/torrents")
-    fun addTorrent(
-        @Path("ip") ip: String,
-        @Body params: RequestBody
-    ): Observable<AddTorrentResponce>
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
+    @POST("http://{ip}:8091/player")
     fun playTorrent(
         @Path("ip") ip: String,
         @Body params: RequestBody
@@ -86,18 +90,18 @@ interface ApiService {
     fun getStore(
         @Path("ip") ip: String,
         @Body params: RequestBody
-    ): Observable<List<GetStoreResponce>>
+    ): Observable<List<GetStoreResponse>>
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
+    @POST("http://{ip}:8091/player")
     fun getPosition(
         @Path("ip") ip: String,
         @Body params: RequestBody
-    ): Observable<GetPositionResponce>
+    ): Observable<GetPositionResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
-    @POST("http://{ip}/player")
-    fun getVolume(@Path("ip") ip: String, @Body params: RequestBody): Observable<VolumeResponce>
+    @POST("http://{ip}:8091/player")
+    fun getVolume(@Path("ip") ip: String, @Body params: RequestBody): Observable<VolumeResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{ip}:8090/torrents")
@@ -108,7 +112,7 @@ interface ApiService {
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("http://{server}/ping")
-    fun findServer(@Path("server") path: String): Observable<FindServerResponce>
+    fun findServer(@Path("server") path: String): Observable<FindServerResponse>
 
 
 
@@ -121,4 +125,19 @@ interface ApiService {
         @Query("hash") hash: String,
         @Query("q") q: String,
     ): Observable<ResponseBody>
+
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @POST("http://{ip}:8090/torrents")
+    fun addTorrent(
+        @Path("ip") ip: String,
+        @Body params: RequestBody
+    ): Observable<AddTorrentResponse>
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @GET("https://{ip}/v3/searchTitles")
+    fun searchAnime(
+        @Path("ip") ip: String,
+        @Query("search") q: String,
+    ): Observable<AnimeResponseMain>
 }

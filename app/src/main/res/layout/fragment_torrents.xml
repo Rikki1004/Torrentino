@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.torrents.TorrentsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tw_torrents"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewTorrents"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="torrents" />
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

@@ -7,4 +7,7 @@ data class MainTrailerPreview (
     @SerializedName("avatarsUrl")
     @Expose
     var url: String
-)
+){
+    val preview: String
+        get() = "https:${url}/600x380"
+}

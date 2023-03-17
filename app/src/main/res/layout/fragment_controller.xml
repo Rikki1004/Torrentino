@@ -1,15 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.controller.ControllerFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".presentation.ui.controller.ControllerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+<TextView
+    android:id="@+id/textViewControllerMainTitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:text="@string/controller_nothing"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<LinearLayout
+    android:id="@+id/linearLayout1"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/textViewControllerMainTitle">
+
     <TextView
-        android:id="@+id/tw_controller"
+        android:id="@+id/textViewControllerStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:text="@string/cotroller_time00" />
+
+    <SeekBar
+        android:id="@+id/seekBarControllerTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="150"
+        android:indeterminate="false"
+        android:max="10000" />
+
+    <TextView
+        android:id="@+id/textViewControllerEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:text="@string/cotroller_time00" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/linearLayout2"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+    <ImageButton
+        android:id="@+id/buttonControllerBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@android:drawable/ic_media_previous"
+        app:iconGravity="textTop"
+        android:contentDescription="@string/controller_previous" />
+
+    <ImageButton
+        android:id="@+id/buttonControllerPlay"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:src="@android:drawable/ic_media_pause"
+        android:isScrollContainer="false"
+        android:contentDescription="@string/controller_play" />
+
+    <ImageButton
+        android:id="@+id/buttonControllerStop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:src="@android:drawable/ic_delete"
+        android:contentDescription="@string/controller_stop" />
+
+    <ImageButton
+        android:id="@+id/buttonControllerNext"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@android:drawable/ic_media_next"
+        app:iconGravity="textTop"
+        android:contentDescription="@string/controller_next" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="0dp"
+    android:id="@+id/linearLayout3"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    <Button
+        android:id="@+id/buttonControllerMute"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:icon="@android:drawable/ic_lock_silent_mode"
+        app:iconGravity="textTop" />
+
+    <SeekBar
+        android:id="@+id/seekBarControllerVolume"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="controller" />
+        android:max="100" />
+</LinearLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
