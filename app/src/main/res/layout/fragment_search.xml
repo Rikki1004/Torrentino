@@ -8,10 +8,19 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewSearch"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/switchAnimeSearch"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAnimeSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="anime"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

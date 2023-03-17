@@ -22,6 +22,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: SearchViewModel
     private lateinit var adapter: SearchAdapter
+    private var isAnime = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +44,11 @@ class SearchFragment : Fragment() {
         sv.clearFocus()
         sv.requestFocusFromTouch()
 
+        binding.switchAnimeSearch.setOnCheckedChangeListener{ _, isChecked ->
+            isAnime = isChecked
+        }
+
+
         val recycleView = binding.recycleViewSearch
         adapter = SearchAdapter()
 
@@ -55,7 +61,7 @@ class SearchFragment : Fragment() {
 
         adapter.onFilmClickListener = object : SearchAdapter.OnFilmClickListener{
             override fun onFilmClick(id: Int, type: String) {
-                val fragment =  FilmDetailFragment.newInstance(id,type,R.id.searchFragmentContainer)
+                val fragment =  FilmDetailFragment.newInstance(id,type,R.id.searchFragmentContainer,isAnime)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .add(R.id.searchFragmentContainer,fragment)
                     .addToBackStack(null)
@@ -69,7 +75,10 @@ class SearchFragment : Fragment() {
             }
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0 != null && p0.length >= 3)
-                    viewModel.search(p0)
+                    if (isAnime)
+                        viewModel.searchAnime(p0)
+                    else
+                        viewModel.search(p0)
                 else
                     adapter.submitList(null)
                 return false

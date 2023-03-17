@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Poster
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Title
+import com.rikkimikki.torrentino.utils.LIBRIA_POSTER_URL
 
 data class Movie__1 (
     @SerializedName("id")

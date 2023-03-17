@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.ItemFilmBinding
 import com.rikkimikki.torrentino.databinding.ItemSearchBinding
+import com.rikkimikki.torrentino.domain.pojo.MovieTypes
 import com.rikkimikki.torrentino.domain.pojo.film.Film
 import com.rikkimikki.torrentino.domain.pojo.search.Movie__1
 import com.squareup.picasso.Picasso
@@ -29,7 +30,10 @@ class SearchAdapter: ListAdapter<Movie__1, SearchAdapter.SearchViewHolder>(Searc
         holder.textViewRating.text = film.rating.kinopoisk.value.toString()
         holder.textViewReleaseDate.text = film.releaseDate
         if (film.poster!=null){
-            val poster = "https:"+film.poster.url+"/136x204"
+            val poster = if (film.type == MovieTypes.ANIME.name)
+                film.poster.posterLibria
+            else
+                film.poster.posterKP
             Picasso.get().load(poster).into(holder.imageViewPoster)
         }else{
             Picasso.get().load(R.drawable.placeholder).into(holder.imageViewPoster)

@@ -10,18 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.rikkimikki.torrentino.R
 import com.rikkimikki.torrentino.databinding.FragmentFilmDetailBinding
+import com.rikkimikki.torrentino.domain.pojo.MovieTypes
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.Film
 import com.squareup.picasso.Picasso
 
 private const val ARG_ID = "ID"
 private const val ARG_TYPE = "TYPE"
-private const val CONTAINER = "CONTAINER"
+private const val ARG_CONTAINER = "CONTAINER"
+private const val ARG_IS_ANIME = "IS_ANIME"
 
 
 class FilmDetailFragment : Fragment() {
     private var id: Int = 0
     private var container: Int = 0
     private lateinit var type: String
+    private var isAnime: Boolean = false
 
     private var _binding: FragmentFilmDetailBinding? = null
     private val binding get() = _binding!!
@@ -30,10 +33,11 @@ class FilmDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireArguments().let {
-            if (it.containsKey(ARG_ID) && it.containsKey(ARG_TYPE) && it.containsKey(CONTAINER)){
+            if (it.containsKey(ARG_ID) && it.containsKey(ARG_TYPE) && it.containsKey(ARG_CONTAINER) && it.containsKey(ARG_IS_ANIME)){
                 id = it.getInt(ARG_ID)
-                container = it.getInt(CONTAINER)
+                container = it.getInt(ARG_CONTAINER)
                 type = it.getString(ARG_TYPE)!!
+                isAnime = it.getBoolean(ARG_IS_ANIME)
             }
             else
                 throw Exception()
@@ -54,8 +58,10 @@ class FilmDetailFragment : Fragment() {
 
         startObservers()
 
-        if (type == FILM)
+        if (type.uppercase() == MovieTypes.FILM.name)
             viewModel.getFilm(id)
+        else if(type == MovieTypes.ANIME.name)
+            viewModel.getAnime(id)
         else
             viewModel.getTvSerie(id)
 
@@ -68,12 +74,28 @@ class FilmDetailFragment : Fragment() {
         viewModel.tvSerie.observe(viewLifecycleOwner){tvSerie ->
             configurate(tvSerie.data.film)
         }
+        viewModel.anime.observe(viewLifecycleOwner){anime ->
+            val film = anime.toFilm()
+            configurate(film)
+            binding.playButton.setOnClickListener(View.OnClickListener {
+                val fragment = SearchTorrentsFragment.newInstance(
+                    film.title.russian,
+                    film.poster.posterLibria,
+                    anime.torrents.toData()
+                )
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(container,fragment)
+                    .addToBackStack(null)
+                    .commit()
+            })
+        }
     }
 
     private fun configurate(film: Film){
         with(binding) {
+            val poster = if (isAnime) film.poster.posterLibria else film.poster.posterKpBig
             Picasso.get()
-                .load("https:${film.poster.url}/600x900")
+                .load(poster)
                 .placeholder(R.drawable.placeholder)
                 .into(imageViewBigPoster)
             textViewTitle.text = film.title.russian
@@ -83,7 +105,7 @@ class FilmDetailFragment : Fragment() {
             textViewOverview.text = film.overview
 
             if (film.mainTraller != null ) {
-                Picasso.get().load("https:${film.mainTraller.mainTrallerPreview.url}/600x380")
+                Picasso.get().load(film.mainTraller.mainTrallerPreview.preview)
                     .into(imageViewTrallerPreview)
                 imageViewTrallerPreview.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW)
@@ -98,25 +120,26 @@ class FilmDetailFragment : Fragment() {
                 imageViewPlay.visibility = View.GONE
             }
 
-            binding.playButton.setOnClickListener(View.OnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .add(container,SearchTorrentsFragment.newInstance(film.title.russian,"https:${film.poster.url}/600x900"))
-                    .addToBackStack(null)
-                    .commit()
-            })
+            if (!isAnime)
+                binding.playButton.setOnClickListener(View.OnClickListener {
+                    val fragment = SearchTorrentsFragment.newInstance(film.title.russian,poster)
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .add(container,fragment)
+                        .addToBackStack(null)
+                        .commit()
+                })
         }
     }
 
 
     companion object {
-        const val FILM = "Film"
-        const val TVSERIE = "TvSeries"
-        fun newInstance(id: Int, type: String,container:Int) =
+        fun newInstance(id: Int, type: String,container:Int,is_amine:Boolean = false) =
             FilmDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_ID, id)
                     putString(ARG_TYPE, type)
-                    putInt(CONTAINER, container)
+                    putInt(ARG_CONTAINER, container)
+                    putBoolean(ARG_IS_ANIME,is_amine)
                 }
             }
     }

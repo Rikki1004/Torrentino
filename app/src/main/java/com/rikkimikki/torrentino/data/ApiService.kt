@@ -1,5 +1,7 @@
 package com.rikkimikki.torrentino.data
 
+import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponse
+import com.rikkimikki.torrentino.domain.pojo.anime.AnimeResponseMain
 import com.rikkimikki.torrentino.domain.pojo.category.CategoryResponse
 import com.rikkimikki.torrentino.domain.pojo.film.FilmsResponse
 import com.rikkimikki.torrentino.domain.pojo.filmDetailInfo.FilmInfoResponse
@@ -43,6 +45,14 @@ interface ApiService {
         @Body params: RequestBody,
         @Query("operationName") graph: String
     ): Observable<TvSerieInfoResponce>
+
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @GET("https://{ip}/v3/getTitle")
+    fun getAnimeInfo(
+        @Path("ip") ip: String,
+        @Query("id") id: Int,
+    ): Observable<AnimeResponse>
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
@@ -123,4 +133,11 @@ interface ApiService {
         @Path("ip") ip: String,
         @Body params: RequestBody
     ): Observable<AddTorrentResponse>
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @GET("https://{ip}/v3/searchTitles")
+    fun searchAnime(
+        @Path("ip") ip: String,
+        @Query("search") q: String,
+    ): Observable<AnimeResponseMain>
 }
