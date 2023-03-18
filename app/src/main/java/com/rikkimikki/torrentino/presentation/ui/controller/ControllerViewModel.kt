@@ -29,7 +29,7 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
         else if (sharedPreferences.contains(SERVER_IP))
             sharedPreferences.getString(SERVER_IP,NO_IP) ?: NO_IP
         else{
-            Toast.makeText(getApplication(), "err", Toast.LENGTH_SHORT).show()
+            toast(getApplication(), R.string.error)
             NO_IP
         }
     }
@@ -50,8 +50,8 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
                 { volumeResponse ->
                     volume.value = volumeResponse.volume
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(), R.string.error)
                 }))
     }
 
@@ -64,8 +64,8 @@ class ControllerViewModel(application: Application) : AndroidViewModel(applicati
                 { positionResponse ->
                     position.value = positionResponse
                 },
-                { throwable ->
-                    println(throwable.toString())
+                {
+                    toast(getApplication(), R.string.error)
                 }))
     }
 

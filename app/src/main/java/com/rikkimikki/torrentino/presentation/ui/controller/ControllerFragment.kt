@@ -73,13 +73,13 @@ class ControllerFragment : Fragment() {
         }
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
+    /*override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (hidden)
             viewModel.stopRequests()
         else
             viewModel.getPosition()
-    }
+    }*/
 
     override fun onDestroyView() {
         _binding = null
