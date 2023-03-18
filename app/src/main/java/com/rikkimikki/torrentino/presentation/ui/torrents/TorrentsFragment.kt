@@ -32,7 +32,6 @@ class TorrentsFragment : Fragment() {
         initAdapter()
 
         viewModel.getTorrents().observe(viewLifecycleOwner){
-            println("aa")
             adapter.submitList(it)
         }
     }
@@ -57,13 +56,13 @@ class TorrentsFragment : Fragment() {
         recycleView.adapter = adapter
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
+    /*override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (hidden)
             viewModel.stopRequests()
         else
             viewModel.getTorrents()
-    }
+    }*/
 
     override fun onDestroyView() {
         _binding = null

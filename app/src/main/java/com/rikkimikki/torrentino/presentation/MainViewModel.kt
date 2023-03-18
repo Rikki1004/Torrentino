@@ -12,11 +12,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import java.io.IOException
 import java.net.DatagramSocket
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.Socket
+import kotlin.concurrent.thread
 
 class MainViewModel(application: Application):AndroidViewModel(application) {
     private var sharedPreferences = getApplication<Application>().getSharedPreferences(
@@ -25,16 +27,15 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
     )
 
     fun initServers(){
-        viewModelScope.launch(Dispatchers.IO) {
-            if(!checkServer(sharedPreferences.getString(SERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_SERVER_PORT))
-                searchServer()
-            if(!checkServer(sharedPreferences.getString(TORRSERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_TORRSERVER_PORT))
-                searchServer()
-        }
+            thread {
+                if(!checkServer(sharedPreferences.getString(SERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_SERVER_PORT))
+                    searchServer()
+                if(!checkServer(sharedPreferences.getString(TORRSERVER_IP,LOCAL_IP) ?: LOCAL_IP,BASE_TORRSERVER_PORT))
+                    searchServer()
+            }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private suspend fun searchServer(){
+    private fun searchServer(){
         var ip: List<String>
         DatagramSocket().use { socket ->
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002)
@@ -45,40 +46,43 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
 
         val prefix = ip[0] + "." + ip[1] + "." + ip[2] + "."
 
-        val answerServer = Channel<Int>()
-        val answerTorrServer = Channel<Int>()
+        var answerServer = -1
+        var answerTorrServer = -1
 
+        val threads = mutableListOf<Thread>()
         for (i in 0..256){
-            viewModelScope.launch(Dispatchers.IO) {
+            threads.add(thread{
                 try {
                     val client = Socket()
                     client.connect(InetSocketAddress(prefix + i.toString(), BASE_TORRSERVER_PORT), 200)
-                    answerTorrServer.send(i)
+                    answerTorrServer = i
                     client.close()
                 }catch (_:Exception){}
 
-            }
+            })
         }
 
         for (i in 0..256){
-            viewModelScope.launch(Dispatchers.IO) {
+            threads.add(thread{
                 try {
                     val client = Socket()
                     client.connect(InetSocketAddress(prefix + i.toString(), BASE_SERVER_PORT), 200)
-                    answerServer.send(i)
+                    answerServer = i
                     client.close()
                 }catch (_:Exception){}
 
-            }
+            })
         }
 
+        for (i in threads)
+            i.join()
 
-        val server = if(!answerServer.isEmpty) prefix + answerServer.receive() else LOCAL_IP
+        val server = if(answerServer != -1) prefix + answerServer else LOCAL_IP
         if (checkServer(server,BASE_SERVER_PORT))
             sharedPreferences.edit().putString(SERVER_IP,server).apply()
 
 
-        val torrServer = if(!answerTorrServer.isEmpty) prefix + answerTorrServer.receive() else LOCAL_IP
+        val torrServer = if(answerTorrServer != -1) prefix + answerTorrServer else LOCAL_IP
         if(checkServer(torrServer,BASE_TORRSERVER_PORT))
             sharedPreferences.edit().putString(TORRSERVER_IP,torrServer).apply()
     }
