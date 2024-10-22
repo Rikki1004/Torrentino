@@ -72,7 +72,8 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun getFilm(id:Int){
-        disposable.add(apiService.getFilmInfo (getFilmsBody(id), "FilmBaseInfo")
+        //disposable.add(apiService.getFilmInfo (getFilmsBody(id), "FilmBaseInfo")
+        disposable.add(apiService.getFilmInfo2 (getFilmsBody2(id), "MovieDetails")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -83,7 +84,20 @@ class CategoriesViewModel(application: Application) : AndroidViewModel(applicati
                     toast(getApplication(),R.string.error)
                 }))
     }
+
     fun getTvSerie(id:Int){
+        disposable.add(apiService.getTvSerieInfo (getTvSerieBody(id), "TvSeriesBaseInfo")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { tvSerieResponse ->
+                    tvSerie.postValue(tvSerieResponse)
+                },
+                {
+                    toast(getApplication(),R.string.error)
+                }))
+    }
+    fun getTvSerieOld(id:Int){
         disposable.add(apiService.getTvSerieInfo (getTvSerieBody(id), "TvSeriesBaseInfo")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
