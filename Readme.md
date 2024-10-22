@@ -15,6 +15,4 @@
 <img src="https://user-images.githubusercontent.com/81743483/226067835-af64caed-d065-4be4-95d7-f4a63609fad9.png" width="30%">
 <img src="https://user-images.githubusercontent.com/81743483/226067916-7640073e-ae6c-4895-ac63-940f1edefc3d.png" width="30%">
 <img src="https://user-images.githubusercontent.com/81743483/226067972-f43e5cfd-464e-4ca7-8a0a-7cc16bb76946.png" width="30%">
-<a name="license"></a>
-## License
-`TeleDisk` лицензируется в соответствии с условиями лицензии Boost Software License. Тут [LICENSE_1_0.txt](http://www.boost.org/LICENSE_1_0.txt) немного подробнее.
+
