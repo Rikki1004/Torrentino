@@ -38,6 +38,13 @@ interface ApiService {
 
     @Headers("service-id: 25", "Content-Type: application/json")
     @POST("graphql/")
+    fun getFilmInfo2(
+        @Body params: RequestBody,
+        @Query("operationName") graph: String
+    ): Observable<FilmInfoResponse>
+
+    @Headers("service-id: 25", "Content-Type: application/json")
+    @POST("graphql/")
     fun getTvSerieInfo(
         @Body params: RequestBody,
         @Query("operationName") graph: String

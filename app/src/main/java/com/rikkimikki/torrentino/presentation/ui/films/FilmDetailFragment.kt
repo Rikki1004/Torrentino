@@ -52,7 +52,7 @@ class FilmDetailFragment : Fragment() {
         _binding = FragmentFilmDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[CategoriesViewModel::class.java]
@@ -64,7 +64,8 @@ class FilmDetailFragment : Fragment() {
         else if(type == MovieTypes.ANIME.name)
             viewModel.getAnime(id)
         else
-            viewModel.getTvSerie(id)
+            //viewModel.getTvSerie(id)
+            viewModel.getFilm(id)
 
     }
 
@@ -81,7 +82,7 @@ class FilmDetailFragment : Fragment() {
             binding.playButton.setOnClickListener {
                 val fragment = SearchTorrentsFragment.newInstance(
                     film.title.russian,
-                    film.poster?.posterLibria ?: NO_POSTER_URL,
+                    film.gallery.posters.vertical?.posterLibria ?: NO_POSTER_URL,
                     anime.torrents.toData()
                 )
                 requireActivity().supportFragmentManager.beginTransaction()
@@ -94,8 +95,8 @@ class FilmDetailFragment : Fragment() {
 
     private fun configurate(film: Film){
         with(binding) {
-            val poster = if (film.poster != null){
-                if (isAnime) film.poster.posterLibria else film.poster.posterKpBig
+            val poster = if (film.gallery.posters.vertical != null){
+                if (isAnime) film.gallery.posters.vertical.posterLibria else film.gallery.posters.vertical.posterKpBig
             }else {
                 NO_POSTER_URL
             }

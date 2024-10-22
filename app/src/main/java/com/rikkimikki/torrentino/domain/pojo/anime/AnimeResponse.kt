@@ -56,7 +56,8 @@ data class AnimeResponse (
             season.year.toInt(),
             Rating(KinopoiskReviews(0,0f),in_favorites),
             description,
-            Poster(posters.small.url),
+            //Poster(posters.small.url),
+            Gallery(Posters(Poster(posters.small.url))) ,
             Ott(PromoTrailers(listOf()))
         )
     }

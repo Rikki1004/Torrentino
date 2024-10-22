@@ -25,9 +25,13 @@ data class Film (
     @Expose
     val overview: String,
 
-    @SerializedName("poster")
+    //@SerializedName("poster")
+    //@Expose
+    //val poster: Poster?,
+
+    @SerializedName("gallery")
     @Expose
-    val poster: Poster?,
+    val gallery: Gallery,
 
     @SerializedName("ott")
     @Expose
